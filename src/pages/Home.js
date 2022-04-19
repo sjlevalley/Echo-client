@@ -6,39 +6,40 @@ import Broadcast from '../components/Broadcast'
 
 // https://us-central1-echo-726ac.cloudfunctions.net/api
 
-function Home() {
-    const [broadcasts, setBroadcasts] = useState(null)
+function Home () {
+  const [broadcasts, setBroadcasts] = useState(null)
 
-    const recentBroadcasts = broadcasts ? (
-        broadcasts.map((broadcast) => <Broadcast broadcast={broadcast} />)
-    ) : (
-        <p key={Math.random()}>Loading...</p>
-    )
+  const recentBroadcasts = broadcasts ? (
+    broadcasts.map(broadcast => <Broadcast broadcast={broadcast} />)
+  ) : (
+    <p key={Math.random()}>Loading...</p>
+  )
 
-    useEffect(() => {
-        axios.get('/api/broadcasts')
-            .then(res => {
-                setBroadcasts(() => res.data)
-            })
-            .catch((e) => {
-                console.error(e)
-            })
-    }, [])
+  useEffect(() => {
+    axios
+      .get('/api/broadcasts')
+      .then(res => {
+        setBroadcasts(() => res.data)
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
 
-    useEffect(() => {
-        console.log(broadcasts)
-    }, [broadcasts])
+  useEffect(() => {
+    console.log(broadcasts)
+  }, [broadcasts])
 
-    return (
-        <Grid container spacing={10}>
-            <Grid item sm={8} xs={12}>
-                {recentBroadcasts}
-            </Grid>
-            <Grid item sm={4} xs={12}>
-                <p>Profile...</p>
-            </Grid>
-        </Grid>
-    )
+  return (
+    <Grid container spacing={10}>
+      <Grid item sm={8} xs={12}>
+        {recentBroadcasts}
+      </Grid>
+      <Grid item sm={4} xs={12}>
+        <p>Profile...</p>
+      </Grid>
+    </Grid>
+  )
 }
 
 export default Home

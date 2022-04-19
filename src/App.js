@@ -1,8 +1,8 @@
 import React from 'react'
-import './App.css';
+import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { createTheme } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 
 // Pages
 import Home from './pages/Home'
@@ -10,7 +10,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 
 // Components
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'
 
 const theme = createTheme({
   palette: {
@@ -29,23 +29,23 @@ const theme = createTheme({
   }
 })
 
-function App() {
+function App () {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="App">
+      <div className='App'>
         <Router>
           <Navbar />
           <div className='container'>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
             </Routes>
           </div>
         </Router>
       </div>
     </MuiThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App
