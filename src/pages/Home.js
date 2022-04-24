@@ -6,11 +6,11 @@ import Broadcast from '../components/Broadcast'
 
 // https://us-central1-echo-726ac.cloudfunctions.net/api
 
-function Home () {
+function Home() {
   const [broadcasts, setBroadcasts] = useState(null)
 
   const recentBroadcasts = broadcasts ? (
-    broadcasts.map(broadcast => <Broadcast broadcast={broadcast} />)
+    broadcasts.map(broadcast => <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />)
   ) : (
     <p key={Math.random()}>Loading...</p>
   )
@@ -25,10 +25,6 @@ function Home () {
         console.error(e)
       })
   }, [])
-
-  useEffect(() => {
-    console.log(broadcasts)
-  }, [broadcasts])
 
   return (
     <Grid container spacing={10}>
