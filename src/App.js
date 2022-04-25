@@ -19,22 +19,8 @@ import { appPageTheme } from './util/theme'
 
 const theme = createTheme(appPageTheme)
 
-const token = localStorage.FBIdToken
-
-// let authenticated
-// if (token) {
-//   const decodedToken = jwtDecode(token)
-//   if (decodedToken.exp * 1000 < Date.now()) {
-//     window.location.href = '/login'
-//     authenticated = false
-//   } else {
-//     authenticated = true
-//   }
-// }
-
 function App() {
-
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(true)
 
   return (
     <MuiThemeProvider theme={theme}>
