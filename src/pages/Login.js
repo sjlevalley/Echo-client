@@ -68,10 +68,6 @@ function Login() {
       })
   }
 
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
   const handleChange = (e) => {
     if (e.target.name === 'email') {
       setEmail(() => e.target.value)
