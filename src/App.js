@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import './App.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from './redux/auth/authSlice'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
 import jwtDecode from 'jwt-decode'
+import './App.css'
 
 // Pages
 import Home from './pages/Home'

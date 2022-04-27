@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Grid } from '@material-ui/core'
+import { getUser, setUser } from '../redux/auth/authSlice'
 
 import Broadcast from '../components/Broadcast'
 
@@ -8,6 +10,7 @@ import Broadcast from '../components/Broadcast'
 
 function Home() {
   const [broadcasts, setBroadcasts] = useState(null)
+  const dispatch = useDispatch()
 
   const recentBroadcasts = broadcasts ? (
     broadcasts.map(broadcast => <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />)
@@ -34,6 +37,8 @@ function Home() {
       <Grid item sm={4} xs={12}>
         <p>Profile...</p>
       </Grid>
+      {/* <button onClick={() => dispatch(getUser())}>getUser</button>
+      <button onClick={() => dispatch(setUser({ name: 'Steve' }))}>setUser</button> */}
     </Grid>
   )
 }
