@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router';
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import AppIcon from '../images/icon.png'
@@ -8,7 +8,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import axios from 'axios'
+
+import { login } from '../redux/auth/authActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,32 +41,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Login() {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const classes = useStyles();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(() => true)
     const userData = {
       email: email,
       password: password,
     }
-    axios.post('/api/login', userData)
-      .then((res) => {
-        console.log(res.data)
-        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`)
-        setLoading(() => false)
-        navigate('/')
-      })
-      .catch((e) => {
-        console.error(e)
-        setErrors(() => e.response.data)
-        setLoading(() => false)
-      })
+    dispatch(login(userData))
   }
 
   const handleChange = (e) => {
