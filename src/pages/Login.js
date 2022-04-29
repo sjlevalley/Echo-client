@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { login } from '../redux/auth/authActions';
+import { clearError } from '../redux/ui/uiSlice'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +47,10 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState({})
+
+  const errors = useSelector(state => state.ui.errors)
+
+  console.log(errors)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -58,12 +62,11 @@ function Login() {
   }
 
   const handleChange = (e) => {
-    if (e.target.name === 'email') {
-      setEmail(() => e.target.value)
-    }
-    if (e.target.name === 'password') {
-      setPassword(() => e.target.value)
-    }
+    let updated = { ...errors }
+    delete updated[`${e.target.name}`]
+    dispatch(clearError(updated))
+    if (e.target.name === 'email') setEmail(() => e.target.value)
+    if (e.target.name === 'password') setPassword(() => e.target.value)
   }
 
   return (

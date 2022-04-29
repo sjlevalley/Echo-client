@@ -1,5 +1,5 @@
 // Import the reducers from each respective state slice. 
-// import { uiActions } from './ui-slice';
+import { setError } from '../ui/uiSlice';
 import axios from 'axios'
 import jwtDecode from 'jwt-decode';
 import { getUser, setUser } from './authSlice';
@@ -17,8 +17,7 @@ export const login = (userData) => {
             }
             dispatch(setUser(userInfo))
         } catch (e) {
-            console.log(`${e.response.status} - ${e.response.statusText}`)
-            // Set an error in the store here
+            dispatch(setError(e.response.data))
         }
     };
 };
@@ -35,8 +34,7 @@ export const signup = (userData) => {
             }
             dispatch(setUser(userInfo))
         } catch (e) {
-            console.log(`${e.response.status} - ${e.response.statusText}`)
-            // Set an error in the store here
+            dispatch(setError(e.response.data))
         }
     };
 };

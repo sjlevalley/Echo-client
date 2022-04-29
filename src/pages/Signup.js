@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { signup } from '../redux/auth/authActions';
+import { clearError } from '../redux/ui/uiSlice'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -46,7 +47,9 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [userName, setUsername] = useState('')
   const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState({})
+  // const [errors, setErrors] = useState({})
+
+  const errors = useSelector(state => state.ui.errors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -59,23 +62,14 @@ function Signup() {
     dispatch(signup(userData))
   }
 
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
   const handleChange = (e) => {
-    if (e.target.name === 'email') {
-      setEmail(() => e.target.value)
-    }
-    if (e.target.name === 'password') {
-      setPassword(() => e.target.value)
-    }
-    if (e.target.name === 'confirmPassword') {
-      setConfirmPassword(() => e.target.value)
-    }
-    if (e.target.name === 'userName') {
-      setUsername(() => e.target.value)
-    }
+    let updated = { ...errors }
+    delete updated[`${e.target.name}`]
+    dispatch(clearError(updated))
+    if (e.target.name === 'email') setEmail(() => e.target.value)
+    if (e.target.name === 'password') setPassword(() => e.target.value)
+    if (e.target.name === 'confirmPassword') setConfirmPassword(() => e.target.value)
+    if (e.target.name === 'userName') setUsername(() => e.target.value)
   }
 
   return (
@@ -136,9 +130,9 @@ function Signup() {
             onChange={handleChange}
             fullWidth
           />
-          {errors.e && (
+          {errors.general && (
             <Typography variant='body2' className={classes.customError}>
-              {errors.e}
+              {errors.general}
             </Typography>
 
           )}
