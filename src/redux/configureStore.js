@@ -3,12 +3,12 @@ import userReducer from './user/userSlice'
 import uiReducer from './ui/uiSlice'
 
 const reducer = combineReducers({
-    user: userReducer,
-    ui: uiReducer
+  user: userReducer,
+  ui: uiReducer
 })
 
 const store = configureStore({
-    reducer,
+  reducer
 })
 
 export default store

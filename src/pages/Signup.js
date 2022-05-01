@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 import AppIcon from '../images/icon.png'
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { signup } from '../redux/user/userActions';
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import { signup } from '../redux/user/userActions'
 import { clearError } from '../redux/ui/uiSlice'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   form: {
     textAlign: 'center'
   },
@@ -34,15 +34,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.8rem',
     margin: '10px 0 0 0'
   },
-  progress: {
-  }
-}));
+  progress: {}
+}))
 
-
-function Signup() {
+function Signup () {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const classes = useStyles();
+  const classes = useStyles()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -56,7 +54,7 @@ function Signup() {
     if (user) navigate('/')
   }, [user, navigate])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     const userData = {
       email,
@@ -67,7 +65,7 @@ function Signup() {
     dispatch(signup(userData, navigate))
   }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     let updated = { ...errors }
     delete updated[`${e.target.name}`]
     if (errors[[e.target.name]]) {
@@ -75,7 +73,8 @@ function Signup() {
     }
     if (e.target.name === 'email') setEmail(() => e.target.value)
     if (e.target.name === 'password') setPassword(() => e.target.value)
-    if (e.target.name === 'confirmPassword') setConfirmPassword(() => e.target.value)
+    if (e.target.name === 'confirmPassword')
+      setConfirmPassword(() => e.target.value)
     if (e.target.name === 'userName') setUsername(() => e.target.value)
   }
 
@@ -141,7 +140,6 @@ function Signup() {
             <Typography variant='body2' className={classes.customError}>
               {errors.general}
             </Typography>
-
           )}
           <Button
             type='submit'
@@ -150,10 +148,16 @@ function Signup() {
             className={classes.button}
             disabled={loading}
           >
-            {loading ? <CircularProgress size={25} className={classes.progress} /> : 'Signup'}
+            {loading ? (
+              <CircularProgress size={25} className={classes.progress} />
+            ) : (
+              'Signup'
+            )}
           </Button>
           <br />
-          <small>Already have an account? Login <Link to='/login'>Here</Link></small>
+          <small>
+            Already have an account? Login <Link to='/login'>Here</Link>
+          </small>
         </form>
       </Grid>
       <Grid item sm />

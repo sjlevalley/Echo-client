@@ -8,12 +8,14 @@ import Broadcast from '../components/Broadcast'
 
 // https://us-central1-echo-726ac.cloudfunctions.net/api
 
-function Home() {
+function Home () {
   const [broadcasts, setBroadcasts] = useState(null)
   const dispatch = useDispatch()
 
   const recentBroadcasts = broadcasts ? (
-    broadcasts.map(broadcast => <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />)
+    broadcasts.map(broadcast => (
+      <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />
+    ))
   ) : (
     <p key={Math.random()}>Loading...</p>
   )

@@ -21,7 +21,7 @@ import { appPageTheme } from './util/theme'
 
 const theme = createTheme(appPageTheme)
 
-function App() {
+function App () {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
 
@@ -46,9 +46,12 @@ function App() {
                   <PrivateRoute user={user} redirectPath='/login'>
                     <Home />
                   </PrivateRoute>
-                } />
-              <Route element={<PrivateRoute user={user} redirectPath='/login' />}>
-                <Route path="/" element={<Home />} />
+                }
+              />
+              <Route
+                element={<PrivateRoute user={user} redirectPath='/login' />}
+              >
+                <Route path='/' element={<Home />} />
                 {/* Can add more protected routes here nested in this parent route */}
               </Route>
             </Routes>
