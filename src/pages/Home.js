@@ -38,9 +38,9 @@ function Home() {
         {recentBroadcasts}
       </Grid>
       <Grid item sm={4} xs={12}>
-        {/* <Profile /> */}
+        <Profile />
       </Grid>
-      <button onClick={() => dispatch(logout())}>logout</button>
+      {/* <button onClick={() => dispatch(logout())}>logout</button> */}
       {/*  <button onClick={() => dispatch(setUser({ name: 'Steve' }))}>setUser</button> */}
     </Grid>
   )
