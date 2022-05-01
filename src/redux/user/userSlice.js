@@ -5,24 +5,26 @@ const initialState = {
   authenticated: false,
   userDetails: null,
   error: false,
-  loading: false,
-  success: false
+  loading: false
 }
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getUser () {},
-    setUserToken (state, action) {
+    loadingUser(state, action) {
+      return { ...state, loading: true }
+    },
+    setUserToken(state, action) {
       const userTokenData = action.payload
       return { ...state, user: userTokenData, authenticated: true }
     },
-    setUserData (state, action) {
+    setUserData(state, action) {
       const userData = action.payload
-      return { ...state, userDetails: userData }
+
+      return { ...state, loading: false, userDetails: userData }
     },
-    clearUser (state, action) {
+    clearUser(state, action) {
       return { ...state, user: null, userDetails: null, authenticated: false }
     }
   }
@@ -31,6 +33,7 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   getUser,
+  loadingUser,
   clearUser,
   setUserData,
   setUserToken

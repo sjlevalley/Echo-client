@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Grid } from '@material-ui/core'
 import { logout } from '../redux/user/userActions'
+import Profile from '../components/Profile'
 
 import Broadcast from '../components/Broadcast'
 
 // https://us-central1-echo-726ac.cloudfunctions.net/api
 
-function Home () {
+function Home() {
   const [broadcasts, setBroadcasts] = useState(null)
   const dispatch = useDispatch()
 
@@ -37,7 +38,7 @@ function Home () {
         {recentBroadcasts}
       </Grid>
       <Grid item sm={4} xs={12}>
-        <p>Profile...</p>
+        {/* <Profile /> */}
       </Grid>
       <button onClick={() => dispatch(logout())}>logout</button>
       {/*  <button onClick={() => dispatch(setUser({ name: 'Steve' }))}>setUser</button> */}
