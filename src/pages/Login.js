@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import AppIcon from '../images/icon.png'
@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import { login } from '../redux/auth/authActions';
-import { clearError } from '../redux/ui/uiSlice'
+import { login } from '../redux/user/userActions';
+import { clearError, loadingUITrue, loadingUIFalse } from '../redux/ui/uiSlice'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,28 +43,36 @@ const useStyles = makeStyles((theme) => ({
 
 function Login() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const classes = useStyles();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   const errors = useSelector(state => state.ui.errors)
+  const loading = useSelector(state => state.ui.loading)
+  const user = useSelector(state => state.user.user)
 
-  console.log(errors)
+  useEffect(() => {
+    if (user) navigate('/')
+  }, [user, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    dispatch(clearError({}))
     const userData = {
       email: email,
       password: password,
     }
-    dispatch(login(userData))
+    dispatch(login(userData, navigate))
   }
 
   const handleChange = (e) => {
     let updated = { ...errors }
     delete updated[`${e.target.name}`]
-    dispatch(clearError(updated))
+    if (errors[[e.target.name]]) {
+      dispatch(clearError(updated))
+    }
     if (e.target.name === 'email') setEmail(() => e.target.value)
     if (e.target.name === 'password') setPassword(() => e.target.value)
   }

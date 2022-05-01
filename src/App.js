@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from './redux/auth/authSlice'
+import { logout } from './redux/user/userActions'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
@@ -22,7 +22,14 @@ import { appPageTheme } from './util/theme'
 const theme = createTheme(appPageTheme)
 
 function App() {
-  const [user, setUser] = useState(true)
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user.user)
+
+  useEffect(() => {
+    if (user?.token_exp * 1000 < Date.now()) {
+      dispatch(logout())
+    }
+  }, [dispatch, user])
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -31,8 +38,8 @@ function App() {
           <Navbar />
           <div className='container'>
             <Routes>
-              <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
+              <Route path='/login' element={<Login />} user={user} />
+              <Route path='/signup' element={<Signup />} user={user} />
               <Route
                 path='/'
                 element={

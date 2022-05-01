@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Grid } from '@material-ui/core'
-import { getUser, setUser } from '../redux/auth/authSlice'
+import { logout } from '../redux/user/userActions'
 
 import Broadcast from '../components/Broadcast'
 
@@ -37,8 +37,8 @@ function Home() {
       <Grid item sm={4} xs={12}>
         <p>Profile...</p>
       </Grid>
-      {/* <button onClick={() => dispatch(getUser())}>getUser</button>
-      <button onClick={() => dispatch(setUser({ name: 'Steve' }))}>setUser</button> */}
+      <button onClick={() => dispatch(logout())}>logout</button>
+      {/*  <button onClick={() => dispatch(setUser({ name: 'Steve' }))}>setUser</button> */}
     </Grid>
   )
 }
