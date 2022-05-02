@@ -9,7 +9,7 @@ import Broadcast from '../components/Broadcast'
 
 // https://us-central1-echo-726ac.cloudfunctions.net/api
 
-function Home() {
+function Home () {
   const [broadcasts, setBroadcasts] = useState(null)
   const dispatch = useDispatch()
 

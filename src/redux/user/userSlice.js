@@ -19,14 +19,20 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loadingUser(state, action) {
+    loadingUser (state, action) {
       return { ...state, loading: true }
     },
-    setUserToken(state, action) {
+    setUserToken (state, action) {
       const userTokenData = action.payload
-      return { ...state, user: userTokenData, email: userTokenData.email, tokenExp: userTokenData.token_exp, authenticated: true }
+      return {
+        ...state,
+        user: userTokenData,
+        email: userTokenData.email,
+        tokenExp: userTokenData.token_exp,
+        authenticated: true
+      }
     },
-    setUserData(state, action) {
+    setUserData (state, action) {
       const userData = action.payload
       return {
         ...state,
@@ -42,7 +48,7 @@ export const userSlice = createSlice({
         notifications: userData.notifications
       }
     },
-    clearUser(state, action) {
+    clearUser (state, action) {
       return { ...state, user: null, userDetails: null, authenticated: false }
     }
   }

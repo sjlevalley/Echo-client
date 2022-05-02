@@ -54,7 +54,7 @@ export const logout = navigate => {
     try {
       delete axios.defaults.headers.common['Authorization']
       dispatch(clearUser())
-      navigate('/login')
+      // navigate('/login')
     } catch (e) {
       dispatch(setError(e.response.data))
     }
@@ -69,6 +69,36 @@ export const getUserData = () => {
       dispatch(setUserData(data))
     } catch (e) {
       dispatch(setError(e.response.data))
+    }
+  }
+}
+
+export const uploadImage = formData => {
+  return async dispatch => {
+    dispatch(loadingUser())
+    try {
+      const { data } = await axios.post('/api/user/image', formData)
+      console.log(data)
+      // Maybe throw an alert if successful
+      dispatch(getUserData())
+    } catch (e) {
+      dispatch(setError(e.response.data))
+      console.error(e)
+    }
+  }
+}
+
+export const editUserDetails = userDetails => {
+  return async dispatch => {
+    dispatch(loadingUser())
+    try {
+      const { data } = await axios.post('/api/user', userDetails)
+      console.log(data)
+      // Maybe throw a notification if successful
+      dispatch(getUserData())
+    } catch (e) {
+      dispatch(setError(e.response.data))
+      console.error(e)
     }
   }
 }
