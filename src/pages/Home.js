@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Grid } from '@material-ui/core'
-import Profile from '../components/Profile'
 
+import { fetchAllBroadcasts } from '../redux/broadcasts/broadcastActions'
+
+import Profile from '../components/Profile'
 import Broadcast from '../components/Broadcast'
 
-function Home () {
-  const [broadcasts, setBroadcasts] = useState(null)
-  // const dispatch = useDispatch()
+function Home() {
+  const dispatch = useDispatch()
+  const broadcasts = useSelector((state) => state.broadcasts.broadcasts)
 
   const recentBroadcasts = broadcasts ? (
     broadcasts.map(broadcast => (
@@ -18,14 +21,7 @@ function Home () {
   )
 
   useEffect(() => {
-    axios
-      .get('/api/broadcasts')
-      .then(res => {
-        setBroadcasts(() => res.data)
-      })
-      .catch(e => {
-        console.error(e)
-      })
+    dispatch(fetchAllBroadcasts())
   }, [])
 
   return (

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { Link as MuiLink, IconButton } from '@mui/material'
 import { uploadImage, logout } from '../redux/user/userActions'
 
+import MyButton from '../util/MyButton'
+
 import { Typography, Tooltip, Paper, Button } from '@material-ui/core'
 import {
   LocationOn,
@@ -59,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Profile () {
+function Profile() {
   const dispatch = useDispatch()
   const classes = useStyles()
   const loading = useSelector(state => state.user.loading)
@@ -98,14 +100,9 @@ function Profile () {
               onChange={handleImageChange}
               hidden='hidden'
             />
-            <Tooltip title='Edit Profile Picture' placement='top'>
-              <IconButton
-                onClick={handleEditPicture}
-                className={classes.button}
-              >
-                <EditIcon color='primary' />
-              </IconButton>
-            </Tooltip>
+            <MyButton tip='Edit Profile Picture' onClick={handleEditPicture} btnClassName='button' placement='top'>
+              <EditIcon color='primary' />
+            </MyButton>
           </div>
           <hr className={classes.hr} />
           <div className={classes.profileDetails}>
@@ -140,11 +137,9 @@ function Profile () {
             <CalendarToday color='primary' />
             <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
           </div>
-          <Tooltip title='Logout' placement='top'>
-            <IconButton onClick={handleLogout}>
-              <KeyboardReturn color='primary' />
-            </IconButton>
-          </Tooltip>
+          <MyButton tip='Logout' onClick={handleLogout} placement='top'>
+            <KeyboardReturn color='primary' />
+          </MyButton>
           <EditDetails />
         </div>
       </Paper>

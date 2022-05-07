@@ -13,6 +13,9 @@ import {
 } from '@material-ui/core'
 import { Edit as EditIcon } from '@mui/icons-material'
 
+import MyButton from '../util/MyButton'
+
+
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function EditDetails () {
+function EditDetails() {
   const dispatch = useDispatch()
   const classes = useStyles()
   const [bio, setBio] = useState('')
@@ -68,11 +71,9 @@ function EditDetails () {
 
   return (
     <>
-      <Tooltip title='Edit Details' placement='top'>
-        <IconButton onClick={handleOpen} className={classes.button}>
-          <EditIcon color='primary' />
-        </IconButton>
-      </Tooltip>
+      <MyButton tip='Edit Details' onClick={handleOpen} btnClassName={classes.button} placement='top'>
+        <EditIcon color='primary' />
+      </MyButton>
       <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth='sm'>
         <DialogTitle>Edit Your Details</DialogTitle>
         <DialogContent>
