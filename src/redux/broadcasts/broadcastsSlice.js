@@ -25,19 +25,25 @@ export const broadcastsSlice = createSlice({
       return { ...state, broadcasts: [] }
     },
     broadcastSliceLikeBroadcast(state, action) {
-      console.log(action.payload)
-      let index = state.broadcasts.findIndex(broadcast => broadcast.broadcastId === action.payload.broadcastId)
-      state.broadcasts[index] = action.payload
+      state.broadcasts.forEach((broadcast) => {
+        if (broadcast.broadcastId === action.payload.broadcastId) {
+          broadcast = action.payload
+        }
+        return broadcast
+      })
       return {
-        ...state
+        ...state, loading: false
       }
     },
     broadcastSliceUnlikeBroadcast(state, action) {
-      console.log(action.payload)
-      let index = state.broadcasts.findIndex(broadcast => broadcast.broadcastId === action.payload.broadcastId)
-      state.broadcasts[index] = action.payload
+      state.broadcasts.forEach((broadcast) => {
+        if (broadcast.broadcastId === action.payload.broadcastId) {
+          broadcast = action.payload
+        }
+        return broadcast
+      })
       return {
-        ...state
+        ...state, loading: false
       }
     },
   }

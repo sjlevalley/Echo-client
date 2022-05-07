@@ -76,7 +76,9 @@ export const {
   loadingUser,
   clearUser,
   setUserData,
-  setUserToken
+  setUserToken,
+  userSliceLikeBroadcast,
+  userSliceUnlikeBroadcast
 } = userSlice.actions
 
 export default userSlice.reducer
