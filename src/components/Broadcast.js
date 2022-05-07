@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
-import { likeBroadcastAction, unlikeBroadcastAction } from '../redux/broadcasts/broadcastActions'
+import {
+  likeBroadcastAction,
+  unlikeBroadcastAction
+} from '../redux/broadcasts/broadcastActions'
 
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -12,8 +15,8 @@ import Typography from '@material-ui/core/Typography'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ChatIcon from '@mui/icons-material/Chat'
 
 import MyButton from '../util/MyButton'
@@ -22,6 +25,12 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     marginBottom: 10
+  },
+  span: {
+    fontSize: '12px'
+  },
+  container: {
+    marginLeft: '-10px'
   },
   image: {
     minWidth: 200
@@ -32,10 +41,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Broadcast({ broadcast }) {
+function Broadcast ({ broadcast }) {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const user = useSelector((state) => state.user)
+  const user = useSelector(state => state.user)
   dayjs.extend(relativeTime)
 
   const { authenticated } = user
@@ -51,7 +60,7 @@ function Broadcast({ broadcast }) {
   } = broadcast
 
   const isBroadcastLiked = () => {
-    const found = user.likes?.find((like) => like.broadcastId === broadcastId)
+    const found = user.likes?.find(like => like.broadcastId === broadcastId)
     if (found) {
       console.log(`Found is TRUE`)
       return true
@@ -74,16 +83,14 @@ function Broadcast({ broadcast }) {
         <FavoriteBorderIcon color='primary' />
       </Link>
     </MyButton>
+  ) : isBroadcastLiked() ? (
+    <MyButton tip='Unlike' onClick={unlikeBroadcast}>
+      <FavoriteIcon fontSize='small' color='primary' />
+    </MyButton>
   ) : (
-    isBroadcastLiked() ? (
-      <MyButton tip='Unlike' onClick={unlikeBroadcast}>
-        <FavoriteIcon color='primary' />
-      </MyButton>
-    ) : (
-      <MyButton tip='Like' onClick={likeBroadcast}>
-        <FavoriteBorderIcon color='primary' />
-      </MyButton>
-    )
+    <MyButton tip='Like' onClick={likeBroadcast}>
+      <FavoriteBorderIcon fontSize='small' color='primary' />
+    </MyButton>
   )
 
   return (
@@ -105,15 +112,19 @@ function Broadcast({ broadcast }) {
         <Typography variant='body2' color='textSecondary'>
           {dayjs(createdAt).fromNow()}
         </Typography>
-        <Typography variant='body1'>
-          {body}
-        </Typography>
-        {likeButton}
-        <span>{likeCount} Likes</span>
-        <MyButton tip='Comments'>
-          <ChatIcon color='primary' />
-          <span>{commentCount} Comments</span>
-        </MyButton>
+        <Typography variant='body1'>{body}</Typography>
+        <div className={classes.container}>
+          {likeButton}
+          <span className={classes.span}>{likeCount} Likes</span>
+          <MyButton tip='Comments'>
+            <ChatIcon fontSize='small' color='primary' />
+          </MyButton>
+          {commentCount === 1 ? (
+            <span className={classes.span}> {commentCount} Comment</span>
+          ) : (
+            <span>{commentCount} Comments</span>
+          )}
+        </div>
       </CardContent>
     </Card>
   )

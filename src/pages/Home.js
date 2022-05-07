@@ -8,9 +8,9 @@ import { fetchAllBroadcasts } from '../redux/broadcasts/broadcastActions'
 import Profile from '../components/Profile'
 import Broadcast from '../components/Broadcast'
 
-function Home() {
+function Home () {
   const dispatch = useDispatch()
-  const broadcasts = useSelector((state) => state.broadcasts.broadcasts)
+  const broadcasts = useSelector(state => state.broadcasts.broadcasts)
 
   const recentBroadcasts = broadcasts ? (
     broadcasts.map(broadcast => (

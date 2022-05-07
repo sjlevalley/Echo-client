@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Profile() {
+function Profile () {
   const dispatch = useDispatch()
   const classes = useStyles()
   const loading = useSelector(state => state.user.loading)
@@ -100,7 +100,12 @@ function Profile() {
               onChange={handleImageChange}
               hidden='hidden'
             />
-            <MyButton tip='Edit Profile Picture' onClick={handleEditPicture} btnClassName='button' placement='top'>
+            <MyButton
+              tip='Edit Profile Picture'
+              onClick={handleEditPicture}
+              btnClassName='button'
+              placement='top'
+            >
               <EditIcon color='primary' />
             </MyButton>
           </div>

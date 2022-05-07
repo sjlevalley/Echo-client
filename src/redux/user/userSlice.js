@@ -19,10 +19,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loadingUser(state, action) {
+    loadingUser (state, action) {
       return { ...state, loading: true }
     },
-    setUserToken(state, action) {
+    setUserToken (state, action) {
       const userTokenData = action.payload
       return {
         ...state,
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
         authenticated: true
       }
     },
-    setUserData(state, action) {
+    setUserData (state, action) {
       const userData = action.payload
       return {
         ...state,
@@ -48,25 +48,29 @@ export const userSlice = createSlice({
         notifications: userData.notifications
       }
     },
-    clearUser(state, action) {
+    clearUser (state, action) {
       return { ...state, user: null, userDetails: null, authenticated: false }
     },
-    userSliceLikeBroadcast(state, action) {
+    userSliceLikeBroadcast (state, action) {
       return {
-        ...state, likes: [
-          ...state.likes, {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
             userName: state.userName,
-            broadcastId: action.payload.broadcastId,
+            broadcastId: action.payload.broadcastId
           }
         ]
       }
     },
-    userSliceUnlikeBroadcast(state, action) {
+    userSliceUnlikeBroadcast (state, action) {
       return {
         ...state,
-        likes: state.likes.filter((like) => like.broadcastId !== action.payload.broadcastId)
+        likes: state.likes.filter(
+          like => like.broadcastId !== action.payload.broadcastId
+        )
       }
-    },
+    }
   }
 })
 

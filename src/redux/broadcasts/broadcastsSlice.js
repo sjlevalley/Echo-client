@@ -10,10 +10,10 @@ export const broadcastsSlice = createSlice({
   name: 'broadcasts',
   initialState,
   reducers: {
-    loading(state, action) {
+    loading (state, action) {
       return { ...state, loading: true }
     },
-    setBroadcasts(state, action) {
+    setBroadcasts (state, action) {
       const data = action.payload
       return {
         ...state,
@@ -21,31 +21,35 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    clearBroadcasts(state, action) {
+    clearBroadcasts (state, action) {
       return { ...state, broadcasts: [] }
     },
-    broadcastSliceLikeBroadcast(state, action) {
-      state.broadcasts.forEach((broadcast) => {
+    broadcastSliceLikeBroadcast (state, action) {
+      let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
         }
         return broadcast
       })
       return {
-        ...state, loading: false
+        ...state,
+        broadcasts: updated,
+        loading: false
       }
     },
-    broadcastSliceUnlikeBroadcast(state, action) {
-      state.broadcasts.forEach((broadcast) => {
+    broadcastSliceUnlikeBroadcast (state, action) {
+      let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
         }
         return broadcast
       })
       return {
-        ...state, loading: false
+        ...state,
+        broadcasts: updated,
+        loading: false
       }
-    },
+    }
   }
 })
 

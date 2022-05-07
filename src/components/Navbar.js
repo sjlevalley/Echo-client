@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
-import { Add as AddIcon, Home as HomeIcon, Notifications as NotificationsIcon } from '@mui/icons-material'
+import {
+  Add as AddIcon,
+  Home as HomeIcon,
+  Notifications as NotificationsIcon
+} from '@mui/icons-material'
 
 import MyButton from '../util/MyButton'
 
-function Navbar() {
-
+function Navbar () {
   const authenticated = useSelector(state => state.user.authenticated)
   console.log(authenticated)
 
@@ -21,11 +24,11 @@ function Navbar() {
         <Toolbar className='nav-container'>
           {authenticated ? (
             <>
-              <MyButton tip="Post a Broadcast">
+              <MyButton tip='Post a Broadcast'>
                 <AddIcon color='primary' />
               </MyButton>
               <Link to={'/'}>
-                <MyButton tip="Home">
+                <MyButton tip='Home'>
                   <HomeIcon color='primary' />
                 </MyButton>
               </Link>

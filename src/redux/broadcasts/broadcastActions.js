@@ -1,7 +1,15 @@
 // Import the reducers from each respective state slice.
 import axios from 'axios'
-import { setBroadcasts, clearBroadcasts, broadcastSliceLikeBroadcast, broadcastSliceUnlikeBroadcast } from './broadcastsSlice'
-import { userSliceLikeBroadcast, userSliceUnlikeBroadcast } from '../user/userSlice'
+import {
+  setBroadcasts,
+  clearBroadcasts,
+  broadcastSliceLikeBroadcast,
+  broadcastSliceUnlikeBroadcast
+} from './broadcastsSlice'
+import {
+  userSliceLikeBroadcast,
+  userSliceUnlikeBroadcast
+} from '../user/userSlice'
 import { loadingUIFalse, loadingUITrue, setError } from '../ui/uiSlice'
 
 export const fetchAllBroadcasts = () => {
@@ -18,12 +26,13 @@ export const fetchAllBroadcasts = () => {
   }
 }
 
-export const likeBroadcastAction = (broadcastId) => {
+export const likeBroadcastAction = broadcastId => {
   return async dispatch => {
     dispatch(loadingUITrue())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/like`)
       console.log(`LIKE`)
+      console.log(data)
       dispatch(broadcastSliceLikeBroadcast(data))
       dispatch(userSliceLikeBroadcast(data))
     } catch (e) {
@@ -35,12 +44,13 @@ export const likeBroadcastAction = (broadcastId) => {
   }
 }
 
-export const unlikeBroadcastAction = (broadcastId) => {
+export const unlikeBroadcastAction = broadcastId => {
   return async dispatch => {
     dispatch(loadingUITrue())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/unlike`)
       console.log('UNLIKE')
+      console.log(data)
       dispatch(broadcastSliceLikeBroadcast(data))
       dispatch(userSliceUnlikeBroadcast(data))
     } catch (e) {

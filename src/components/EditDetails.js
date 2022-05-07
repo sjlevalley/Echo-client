@@ -15,7 +15,6 @@ import { Edit as EditIcon } from '@mui/icons-material'
 
 import MyButton from '../util/MyButton'
 
-
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function EditDetails() {
+function EditDetails () {
   const dispatch = useDispatch()
   const classes = useStyles()
   const [bio, setBio] = useState('')
@@ -71,7 +70,12 @@ function EditDetails() {
 
   return (
     <>
-      <MyButton tip='Edit Details' onClick={handleOpen} btnClassName={classes.button} placement='top'>
+      <MyButton
+        tip='Edit Details'
+        onClick={handleOpen}
+        btnClassName={classes.button}
+        placement='top'
+      >
         <EditIcon color='primary' />
       </MyButton>
       <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth='sm'>
