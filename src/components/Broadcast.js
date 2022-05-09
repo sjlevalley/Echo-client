@@ -20,11 +20,12 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import ChatIcon from '@mui/icons-material/Chat'
 
 import MyButton from '../util/MyButton'
+import DeleteBroadcast from './DeleteBroadcast'
 
 const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
-    marginBottom: 10
+    marginBottom: 10,
   },
   span: {
     fontSize: '12px'
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Broadcast ({ broadcast }) {
+function Broadcast({ broadcast }) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const user = useSelector(state => state.user)
@@ -93,6 +94,10 @@ function Broadcast ({ broadcast }) {
     </MyButton>
   )
 
+  const deleteButton = authenticated && userName === user.userName ? (
+    <DeleteBroadcast broadcastId={broadcastId} />
+  ) : null
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -109,6 +114,8 @@ function Broadcast ({ broadcast }) {
         >
           {userName}
         </Typography>
+
+        {deleteButton}
         <Typography variant='body2' color='textSecondary'>
           {dayjs(createdAt).fromNow()}
         </Typography>

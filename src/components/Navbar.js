@@ -12,11 +12,11 @@ import {
   Notifications as NotificationsIcon
 } from '@mui/icons-material'
 
+import PostBroadcast from './PostBroadcast'
 import MyButton from '../util/MyButton'
 
-function Navbar () {
+function Navbar() {
   const authenticated = useSelector(state => state.user.authenticated)
-  console.log(authenticated)
 
   return (
     <div>
@@ -24,9 +24,10 @@ function Navbar () {
         <Toolbar className='nav-container'>
           {authenticated ? (
             <>
-              <MyButton tip='Post a Broadcast'>
+              {/* <MyButton tip='Post a Broadcast'>
                 <AddIcon color='primary' />
-              </MyButton>
+              </MyButton> */}
+              <PostBroadcast />
               <Link to={'/'}>
                 <MyButton tip='Home'>
                   <HomeIcon color='primary' />

@@ -10,10 +10,10 @@ export const broadcastsSlice = createSlice({
   name: 'broadcasts',
   initialState,
   reducers: {
-    loading (state, action) {
+    loading(state, action) {
       return { ...state, loading: true }
     },
-    setBroadcasts (state, action) {
+    setBroadcasts(state, action) {
       const data = action.payload
       return {
         ...state,
@@ -21,10 +21,10 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    clearBroadcasts (state, action) {
+    clearBroadcasts(state, action) {
       return { ...state, broadcasts: [] }
     },
-    broadcastSliceLikeBroadcast (state, action) {
+    broadcastSliceLikeBroadcast(state, action) {
       let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
@@ -37,7 +37,7 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    broadcastSliceUnlikeBroadcast (state, action) {
+    broadcastSliceUnlikeBroadcast(state, action) {
       let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
@@ -48,6 +48,22 @@ export const broadcastsSlice = createSlice({
         ...state,
         broadcasts: updated,
         loading: false
+      }
+    },
+    broadcastSliceDeleteBroadcast(state, action) {
+      let updated = state.broadcasts.filter((b) => b.broadcastId !== action.payload)
+      return {
+        ...state,
+        broadcasts: updated
+      }
+    },
+    broadcastsPostBroadcast(state, action) {
+      return {
+        ...state,
+        broadcasts: [
+          action.payload,
+          ...state.broadcasts
+        ]
       }
     }
   }
@@ -58,7 +74,9 @@ export const {
   setBroadcasts,
   clearBroadcasts,
   broadcastSliceLikeBroadcast,
-  broadcastSliceUnlikeBroadcast
+  broadcastSliceUnlikeBroadcast,
+  broadcastSliceDeleteBroadcast,
+  broadcastsPostBroadcast
 } = broadcastsSlice.actions
 
 export default broadcastsSlice.reducer

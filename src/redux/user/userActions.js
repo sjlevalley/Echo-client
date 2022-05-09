@@ -49,12 +49,12 @@ export const signup = (userData, navigate) => {
   }
 }
 
-export const logout = navigate => {
+export const logout = () => {
   return async dispatch => {
     try {
       delete axios.defaults.headers.common['Authorization']
       dispatch(clearUser())
-      // navigate('/login')
+      dispatch(loadingUIFalse())
     } catch (e) {
       dispatch(setError(e.response.data))
     }
