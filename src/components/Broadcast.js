@@ -25,7 +25,7 @@ import DeleteBroadcast from './DeleteBroadcast'
 const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
-    marginBottom: 10,
+    marginBottom: 10
   },
   span: {
     fontSize: '12px'
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Broadcast({ broadcast }) {
+function Broadcast ({ broadcast }) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const user = useSelector(state => state.user)
@@ -63,10 +63,8 @@ function Broadcast({ broadcast }) {
   const isBroadcastLiked = () => {
     const found = user.likes?.find(like => like.broadcastId === broadcastId)
     if (found) {
-      console.log(`Found is TRUE`)
       return true
     } else {
-      console.log(`Found is FALSE`)
       return false
     }
   }
@@ -94,9 +92,10 @@ function Broadcast({ broadcast }) {
     </MyButton>
   )
 
-  const deleteButton = authenticated && userName === user.userName ? (
-    <DeleteBroadcast broadcastId={broadcastId} />
-  ) : null
+  const deleteButton =
+    authenticated && userName === user.userName ? (
+      <DeleteBroadcast broadcastId={broadcastId} />
+    ) : null
 
   return (
     <Card className={classes.card}>

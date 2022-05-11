@@ -15,7 +15,7 @@ import {
 import PostBroadcast from './PostBroadcast'
 import MyButton from '../util/MyButton'
 
-function Navbar() {
+function Navbar () {
   const authenticated = useSelector(state => state.user.authenticated)
 
   return (

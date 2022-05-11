@@ -5,13 +5,19 @@ import {
   clearBroadcasts,
   broadcastSliceLikeBroadcast,
   broadcastSliceUnlikeBroadcast,
-  broadcastSliceDeleteBroadcast
+  broadcastSliceDeleteBroadcast,
+  broadcastSlicePostBroadcast
 } from './broadcastsSlice'
 import {
   userSliceLikeBroadcast,
   userSliceUnlikeBroadcast
 } from '../user/userSlice'
-import { loadingUITrue, setError, clearError } from '../ui/uiSlice'
+import {
+  loadingUITrue,
+  setError,
+  clearError,
+  loadingUIFalse
+} from '../ui/uiSlice'
 
 export const fetchAllBroadcasts = () => {
   return async dispatch => {
@@ -19,6 +25,7 @@ export const fetchAllBroadcasts = () => {
     try {
       const { data } = await axios.get('/api/broadcasts')
       dispatch(setBroadcasts(data))
+      dispatch(loadingUIFalse())
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
@@ -38,7 +45,6 @@ export const likeBroadcastAction = broadcastId => {
       console.error(e)
       dispatch(setError(e.response.data))
     }
-
   }
 }
 
@@ -65,21 +71,20 @@ export const deleteBroadcastAction = broadcastId => {
       console.error(e)
       dispatch(setError(e.response.data))
     }
-
   }
 }
 
-export const postBroadcastAction = (newBroadcast) => {
+export const postBroadcastAction = newBroadcast => {
   return async dispatch => {
     dispatch(clearError())
     dispatch(loadingUITrue())
     try {
-      await axios.post(`/api/broadcast`, newBroadcast)
-      // dispatch(broadcastSliceDeleteBroadcast(broadcastId))
+      const { data } = await axios.post(`/api/broadcast`, newBroadcast)
+      dispatch(broadcastSlicePostBroadcast(data))
+      dispatch(loadingUIFalse())
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
     }
-
   }
 }
