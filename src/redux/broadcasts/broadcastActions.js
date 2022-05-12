@@ -6,7 +6,9 @@ import {
   broadcastSliceLikeBroadcast,
   broadcastSliceUnlikeBroadcast,
   broadcastSliceDeleteBroadcast,
-  broadcastSlicePostBroadcast
+  broadcastSlicePostBroadcast,
+  broadcastSliceSetBroadcast,
+  broadcastSliceClearBroadcast
 } from './broadcastsSlice'
 import {
   userSliceLikeBroadcast,
@@ -81,6 +83,23 @@ export const postBroadcastAction = newBroadcast => {
     try {
       const { data } = await axios.post(`/api/broadcast`, newBroadcast)
       dispatch(broadcastSlicePostBroadcast(data))
+      dispatch(loadingUIFalse())
+    } catch (e) {
+      console.error(e)
+      dispatch(setError(e.response.data))
+    }
+  }
+}
+
+export const getSingleBroadcastAction = (broadcastId) => {
+  return async dispatch => {
+    dispatch(clearError())
+    dispatch(loadingUITrue())
+    try {
+      console.log(broadcastId)
+      const { data } = await axios.get(`/api/broadcast/${broadcastId}`)
+      console.log(data)
+      dispatch(broadcastSliceSetBroadcast(data))
       dispatch(loadingUIFalse())
     } catch (e) {
       console.error(e)

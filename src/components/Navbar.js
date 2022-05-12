@@ -7,7 +7,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import {
-  Add as AddIcon,
   Home as HomeIcon,
   Notifications as NotificationsIcon
 } from '@mui/icons-material'
@@ -15,7 +14,7 @@ import {
 import PostBroadcast from './PostBroadcast'
 import MyButton from '../util/MyButton'
 
-function Navbar () {
+function Navbar() {
   const authenticated = useSelector(state => state.user.authenticated)
 
   return (
@@ -24,9 +23,6 @@ function Navbar () {
         <Toolbar className='nav-container'>
           {authenticated ? (
             <>
-              {/* <MyButton tip='Post a Broadcast'>
-                <AddIcon color='primary' />
-              </MyButton> */}
               <PostBroadcast />
               <Link to={'/'}>
                 <MyButton tip='Home'>

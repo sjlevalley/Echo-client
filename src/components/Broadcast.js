@@ -21,6 +21,7 @@ import ChatIcon from '@mui/icons-material/Chat'
 
 import MyButton from '../util/MyButton'
 import DeleteBroadcast from './DeleteBroadcast'
+import BroadcastDialog from './BroadcastDialog'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Broadcast ({ broadcast }) {
+function Broadcast({ broadcast }) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const user = useSelector(state => state.user)
@@ -131,6 +132,7 @@ function Broadcast ({ broadcast }) {
             <span>{commentCount} Comments</span>
           )}
         </div>
+        <BroadcastDialog broadcastId={broadcastId} />
       </CardContent>
     </Card>
   )

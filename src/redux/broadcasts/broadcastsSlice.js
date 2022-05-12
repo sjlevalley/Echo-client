@@ -10,10 +10,10 @@ export const broadcastsSlice = createSlice({
   name: 'broadcasts',
   initialState,
   reducers: {
-    loading (state, action) {
+    loading(state, action) {
       return { ...state, loading: true }
     },
-    setBroadcasts (state, action) {
+    setBroadcasts(state, action) {
       const data = action.payload
       return {
         ...state,
@@ -21,10 +21,21 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    clearBroadcasts (state, action) {
+    clearBroadcasts(state, action) {
       return { ...state, broadcasts: [] }
     },
-    broadcastSliceLikeBroadcast (state, action) {
+    broadcastSliceSetBroadcast(state, action) {
+      const data = action.payload
+      console.log(data)
+      return {
+        ...state,
+        broadcast: data
+      }
+    },
+    broadcastSliceClearBroadcast(state, action) {
+      return { ...state, broadcast: {} }
+    },
+    broadcastSliceLikeBroadcast(state, action) {
       let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
@@ -37,7 +48,7 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    broadcastSliceUnlikeBroadcast (state, action) {
+    broadcastSliceUnlikeBroadcast(state, action) {
       let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
@@ -50,7 +61,7 @@ export const broadcastsSlice = createSlice({
         loading: false
       }
     },
-    broadcastSliceDeleteBroadcast (state, action) {
+    broadcastSliceDeleteBroadcast(state, action) {
       let updated = state.broadcasts.filter(
         b => b.broadcastId !== action.payload
       )
@@ -59,7 +70,7 @@ export const broadcastsSlice = createSlice({
         broadcasts: updated
       }
     },
-    broadcastSlicePostBroadcast (state, action) {
+    broadcastSlicePostBroadcast(state, action) {
       return {
         ...state,
         broadcasts: [action.payload, ...state.broadcasts]
@@ -75,7 +86,9 @@ export const {
   broadcastSliceLikeBroadcast,
   broadcastSliceUnlikeBroadcast,
   broadcastSliceDeleteBroadcast,
-  broadcastSlicePostBroadcast
+  broadcastSlicePostBroadcast,
+  broadcastSliceSetBroadcast,
+  broadcastSliceClearBroadcast
 } = broadcastsSlice.actions
 
 export default broadcastsSlice.reducer

@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  Tooltip,
   Button,
   TextField,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   CircularProgress
 } from '@material-ui/core'
 import {
-  Edit as EditIcon,
   Add as AddIcon,
   Close as CloseIcon
 } from '@mui/icons-material'
@@ -28,6 +24,8 @@ const useStyles = makeStyles(theme => ({
   },
   submitButton: {
     // position: 'relative'
+    float: 'right',
+    margin: '1rem 0'
   },
   progressSpinner: {
     position: 'absolute'
@@ -39,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function PostBroadcast () {
+function PostBroadcast() {
   const dispatch = useDispatch()
   const classes = useStyles()
   const loading = useSelector(state => state.ui.loading)
@@ -97,8 +95,8 @@ function PostBroadcast () {
               multiline
               minRows='3'
               placeholder='What do you want to Broadcast?'
-              error={errors.body ? true : false}
-              helperText={errors.body}
+              error={errors?.body ? true : false}
+              helperText={errors?.body}
               className={classes.textField}
               onChange={handleChange}
               fullWidth
@@ -108,7 +106,7 @@ function PostBroadcast () {
               variant='contained'
               color='primary'
               className={classes.submitButton}
-              // disabled={loading}
+              disabled={loading}
             >
               Submit
               {loading && (

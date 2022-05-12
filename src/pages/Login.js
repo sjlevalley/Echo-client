@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import { login } from '../redux/user/userActions'
-import { clearError, loadingUITrue, loadingUIFalse } from '../redux/ui/uiSlice'
+import { clearError } from '../redux/ui/uiSlice'
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   progress: {}
 }))
 
-function Login () {
+function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const classes = useStyles()
@@ -86,8 +86,8 @@ function Login () {
           <TextField
             id='email'
             name='email'
-            helperText={errors.email}
-            error={errors.email ? true : false}
+            helperText={errors?.email}
+            error={errors?.email ? true : false}
             type='email'
             label='Email'
             className={classes.textField}
@@ -99,8 +99,8 @@ function Login () {
           <TextField
             id='password'
             name='password'
-            helperText={errors.password}
-            error={errors.password ? true : false}
+            helperText={errors?.password}
+            error={errors?.password ? true : false}
             type='password'
             label='Password'
             className={classes.textField}
