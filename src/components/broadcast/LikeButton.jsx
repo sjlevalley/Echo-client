@@ -4,26 +4,18 @@ import { Link } from "react-router-dom";
 import {
   likeBroadcastAction,
   unlikeBroadcastAction,
-} from "../redux/broadcasts/broadcastActions";
+} from "../../redux/broadcasts/broadcastActions";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 
 function LikeButton({ broadcast }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { authenticated } = user;
-  const {
-    userImage,
-    body,
-    createdAt,
-    userName,
-    broadcastId,
-    likeCount,
-    commentCount,
-  } = broadcast;
+  const { broadcastId } = broadcast;
 
   const isBroadcastLiked = () => {
     const found = user.likes?.find((like) => like.broadcastId === broadcastId);

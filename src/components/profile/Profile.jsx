@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
-import { Link as MuiLink, IconButton } from '@mui/material'
-import { uploadImage, logout } from '../redux/user/userActions'
+import { Link as MuiLink } from '@mui/material'
+import { uploadImage, logout } from '../../redux/user/userActions'
 
-import MyButton from '../util/MyButton'
+import MyButton from '../../util/MyButton'
 
-import { Typography, Tooltip, Paper, Button } from '@material-ui/core'
+import { Typography, Paper, Button } from '@material-ui/core'
 import {
   LocationOn,
   CalendarToday,

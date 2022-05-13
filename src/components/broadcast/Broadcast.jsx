@@ -12,7 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 import ChatIcon from "@mui/icons-material/Chat";
 
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 import LikeButton from "./LikeButton";
 import DeleteBroadcast from "./DeleteBroadcast";
 import BroadcastDialog from "./BroadcastDialog";

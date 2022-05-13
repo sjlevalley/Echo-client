@@ -13,8 +13,8 @@ import {
   Close as CloseIcon
 } from '@mui/icons-material'
 
-import MyButton from '../util/MyButton'
-import { postBroadcastAction } from '../redux/broadcasts/broadcastActions'
+import MyButton from '../../util/MyButton'
+import { postBroadcastAction } from '../../redux/broadcasts/broadcastActions'
 
 import { makeStyles } from '@material-ui/core/styles'
 

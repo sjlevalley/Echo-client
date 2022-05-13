@@ -11,8 +11,8 @@ import {
   Notifications as NotificationsIcon
 } from '@mui/icons-material'
 
-import PostBroadcast from './PostBroadcast'
-import MyButton from '../util/MyButton'
+import PostBroadcast from '../broadcast/PostBroadcast'
+import MyButton from '../../util/MyButton'
 
 function Navbar() {
   const authenticated = useSelector(state => state.user.authenticated)

@@ -10,18 +10,15 @@ import {
 } from "@material-ui/core";
 import { Close as CloseIcon, UnfoldMore } from "@mui/icons-material";
 import ChatIcon from "@mui/icons-material/Chat";
-import {
-  likeBroadcastAction,
-  unlikeBroadcastAction,
-} from "../redux/broadcasts/broadcastActions";
 
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 
 import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 
-import MyButton from "../util/MyButton";
-import { getSingleBroadcastAction } from "../redux/broadcasts/broadcastActions";
+import MyButton from "../../util/MyButton";
+import { getSingleBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -32,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
   invisibleSeparator: {
     border: "none",
     margin: 4,
+  },
+  visibleSeparator: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: "20px",
   },
   profileImage: {
     width: 200,
@@ -63,8 +65,16 @@ function BroadcastDialog({ broadcastId }) {
   const loading = useSelector((state) => state.ui.loading);
   const errors = useSelector((state) => state.ui.errors);
   const broadcast = useSelector((state) => state.broadcasts.broadcast);
-  const { body, createdAt, likeCount, commentCount, userImage, userName } =
-    broadcast;
+
+  const {
+    body,
+    createdAt,
+    likeCount,
+    comments,
+    commentCount,
+    userImage,
+    userName,
+  } = broadcast;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -115,6 +125,8 @@ function BroadcastDialog({ broadcastId }) {
           <span>{commentCount} Comments</span>
         )}
       </Grid>
+      <hr className={classes.visibleSeparator} />
+      <Comments comments={comments} />
     </Grid>
   );
 

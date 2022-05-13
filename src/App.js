@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from './redux/user/userActions'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
-import jwtDecode from 'jwt-decode'
 import './App.css'
 
 // Pages
@@ -13,7 +12,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 
 // Components
-import Navbar from './components/Navbar'
+import Navbar from './components/layout/Navbar'
 import PrivateRoute from './util/PrivateRoute'
 
 // Utils
@@ -21,7 +20,7 @@ import { appPageTheme } from './util/theme'
 
 const theme = createTheme(appPageTheme)
 
-function App () {
+function App() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user)
 
