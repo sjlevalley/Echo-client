@@ -26,7 +26,6 @@ export const broadcastsSlice = createSlice({
     },
     broadcastSliceSetBroadcast(state, action) {
       const data = action.payload
-      console.log(data)
       return {
         ...state,
         broadcast: data
@@ -36,38 +35,46 @@ export const broadcastsSlice = createSlice({
       return { ...state, broadcast: {} }
     },
     broadcastSliceLikeBroadcast(state, action) {
-      let updated = state.broadcasts.map(broadcast => {
+      let updatedBroadcast = state.broadcast
+      let updatedBroadcasts = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
         }
         return broadcast
       })
+      if (state.broadcast.broadcastId === action.payload.broadcastId) {
+        updatedBroadcast = action.payload
+      }
       return {
         ...state,
-        broadcasts: updated,
-        loading: false
+        broadcast: updatedBroadcast,
+        broadcasts: updatedBroadcasts
       }
     },
     broadcastSliceUnlikeBroadcast(state, action) {
+      let updatedBroadcast = state.broadcast
       let updated = state.broadcasts.map(broadcast => {
         if (broadcast.broadcastId === action.payload.broadcastId) {
           broadcast = action.payload
         }
         return broadcast
       })
+      if (state.broadcast.broadcastId === action.payload.broadcastId) {
+        updatedBroadcast = action.payload
+      }
       return {
         ...state,
-        broadcasts: updated,
-        loading: false
+        broadcast: updatedBroadcast,
+        broadcasts: updated
       }
     },
     broadcastSliceDeleteBroadcast(state, action) {
-      let updated = state.broadcasts.filter(
+      let updatedBroadcasts = state.broadcasts.filter(
         b => b.broadcastId !== action.payload
       )
       return {
         ...state,
-        broadcasts: updated
+        broadcasts: updatedBroadcasts
       }
     },
     broadcastSlicePostBroadcast(state, action) {

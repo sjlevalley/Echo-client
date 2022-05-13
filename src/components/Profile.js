@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Profile () {
+function Profile() {
   const dispatch = useDispatch()
   const classes = useStyles()
   const loading = useSelector(state => state.user.loading)
@@ -142,7 +142,7 @@ function Profile () {
             <CalendarToday color='primary' />
             <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
           </div>
-          <MyButton tip='Logout' onClick={handleLogout} placement='top'>
+          <MyButton tip='Logout' onClick={(e) => handleLogout(e)} placement='top'>
             <KeyboardReturn color='primary' />
           </MyButton>
           <EditDetails />

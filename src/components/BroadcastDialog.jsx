@@ -9,6 +9,14 @@ import {
   Grid,
 } from "@material-ui/core";
 import { Close as CloseIcon, UnfoldMore } from "@mui/icons-material";
+import ChatIcon from "@mui/icons-material/Chat";
+import {
+  likeBroadcastAction,
+  unlikeBroadcastAction,
+} from "../redux/broadcasts/broadcastActions";
+
+import LikeButton from "./LikeButton";
+
 import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 
@@ -96,6 +104,16 @@ function BroadcastDialog({ broadcastId }) {
         </Typography>
         <hr className={classes.invisibleSeparator} />
         <Typography variant="body1">{body}</Typography>
+        <LikeButton broadcast={broadcast} />
+        <span>{likeCount} likes</span>
+        <MyButton tip="Comments">
+          <ChatIcon fontSize="small" color="primary" />
+        </MyButton>
+        {commentCount === 1 ? (
+          <span className={classes.span}> {commentCount} Comment</span>
+        ) : (
+          <span>{commentCount} Comments</span>
+        )}
       </Grid>
     </Grid>
   );

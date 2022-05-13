@@ -82,7 +82,7 @@ function Login() {
         <Typography variant='h2' className={classes.pageTitle}>
           Login
         </Typography>
-        <form noValidate onSubmit={handleSubmit}>
+        <form noValidate onSubmit={(e) => handleSubmit(e)}>
           <TextField
             id='email'
             name='email'
@@ -92,7 +92,7 @@ function Login() {
             label='Email'
             className={classes.textField}
             value={email}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             fullWidth
           />
 
@@ -105,12 +105,12 @@ function Login() {
             label='Password'
             className={classes.textField}
             value={password}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             fullWidth
           />
           {errors.e && (
             <Typography variant='body2' className={classes.customError}>
-              {errors.e}
+              {errors?.e}
             </Typography>
           )}
           <Button

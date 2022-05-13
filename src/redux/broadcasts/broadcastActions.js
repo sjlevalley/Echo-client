@@ -38,7 +38,6 @@ export const fetchAllBroadcasts = () => {
 
 export const likeBroadcastAction = broadcastId => {
   return async dispatch => {
-    dispatch(loadingUITrue())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/like`)
       dispatch(broadcastSliceLikeBroadcast(data))
@@ -52,7 +51,6 @@ export const likeBroadcastAction = broadcastId => {
 
 export const unlikeBroadcastAction = broadcastId => {
   return async dispatch => {
-    dispatch(loadingUITrue())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/unlike`)
       dispatch(broadcastSliceUnlikeBroadcast(data))
