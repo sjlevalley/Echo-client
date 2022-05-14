@@ -8,7 +8,10 @@ import {
   broadcastSliceDeleteBroadcast,
   broadcastSlicePostBroadcast,
   broadcastSliceSetBroadcast,
-  broadcastSliceClearBroadcast
+  broadcastSliceClearBroadcast,
+  broadcastSliceSubmitComment,
+  broadcastsSliceSetUserProfile,
+  broadcastsSliceClearUserProfile
 } from './broadcastsSlice'
 import {
   userSliceLikeBroadcast,
@@ -94,14 +97,53 @@ export const getSingleBroadcastAction = (broadcastId) => {
     dispatch(clearError())
     dispatch(loadingUITrue())
     try {
-      console.log(broadcastId)
       const { data } = await axios.get(`/api/broadcast/${broadcastId}`)
-      console.log(data)
       dispatch(broadcastSliceSetBroadcast(data))
-      dispatch(loadingUIFalse())
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
     }
+    dispatch(loadingUIFalse())
+  }
+}
+
+export const submitCommentBroadcastAction = (broadcastId, commentData) => {
+  return async dispatch => {
+    dispatch(clearError())
+    try {
+      const { data } = await axios.post(`/api/broadcast/${broadcastId}/comment`, commentData)
+      dispatch(broadcastSliceSubmitComment(data))
+    } catch (e) {
+      console.error(e)
+      dispatch(setError({ comment: 'Must not be blank' }))
+    }
+    dispatch(loadingUIFalse())
+  }
+}
+
+export const getUserDataBroadcastAction = (userName) => {
+  return async dispatch => {
+    dispatch(loadingUITrue())
+    dispatch(clearError())
+    try {
+      const { data } = await axios.get(`/api/user/${userName}`)
+      dispatch(setBroadcasts(data.broadcasts))
+      dispatch(broadcastsSliceSetUserProfile(data.user))
+    } catch (e) {
+      console.error(e)
+      dispatch(setError())
+    }
+    dispatch(loadingUIFalse())
+  }
+}
+
+export const clearBroadcastBroadcastAction = () => {
+  return async dispatch => {
+    dispatch(broadcastSliceClearBroadcast())
+  }
+}
+export const clearUserProfileBroadcastAction = () => {
+  return async dispatch => {
+    dispatch(broadcastsSliceClearUserProfile())
   }
 }

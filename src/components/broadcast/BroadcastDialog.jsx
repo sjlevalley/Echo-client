@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import {
   Dialog,
   DialogContent,
@@ -13,12 +12,16 @@ import ChatIcon from "@mui/icons-material/Chat";
 
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 
 import MyButton from "../../util/MyButton";
-import { getSingleBroadcastAction } from "../../redux/broadcasts/broadcastActions";
+import {
+  getSingleBroadcastAction,
+  clearBroadcastBroadcastAction,
+} from "../../redux/broadcasts/broadcastActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -63,7 +66,7 @@ function BroadcastDialog({ broadcastId }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const loading = useSelector((state) => state.ui.loading);
-  const errors = useSelector((state) => state.ui.errors);
+  // const errors = useSelector((state) => state.ui.errors);
   const broadcast = useSelector((state) => state.broadcasts.broadcast);
 
   const {
@@ -76,14 +79,11 @@ function BroadcastDialog({ broadcastId }) {
     userName,
   } = broadcast;
 
-  const [isOpen, setIsOpen] = useState(false);
-
   const handleOpen = () => {
     dispatch(getSingleBroadcastAction(broadcastId));
-    setIsOpen(() => true);
   };
   const handleClose = () => {
-    setIsOpen(() => false);
+    dispatch(clearBroadcastBroadcastAction());
   };
 
   const dialogMarkup = loading ? (
@@ -91,7 +91,7 @@ function BroadcastDialog({ broadcastId }) {
       <CircularProgress size={100} thickness={2} />
     </div>
   ) : (
-    <Grid container spacing={16}>
+    <Grid container spacing={10}>
       <Grid item sm={5}>
         <img
           src={userImage}
@@ -126,6 +126,7 @@ function BroadcastDialog({ broadcastId }) {
         )}
       </Grid>
       <hr className={classes.visibleSeparator} />
+      <CommentForm broadcastId={broadcastId} />
       <Comments comments={comments} />
     </Grid>
   );
@@ -139,7 +140,12 @@ function BroadcastDialog({ broadcastId }) {
       >
         <UnfoldMore color="primary" />
       </MyButton>
-      <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
+      <Dialog
+        open={broadcast.userName}
+        onClose={handleClose}
+        fullWidth
+        maxWidth="sm"
+      >
         <MyButton
           tip="Close"
           onClick={handleClose}

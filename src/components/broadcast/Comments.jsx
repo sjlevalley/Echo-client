@@ -2,12 +2,7 @@ import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  CircularProgress,
-  Grid,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 
@@ -33,14 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Comments({ comments }) {
-  const dispatch = useDispatch();
   const classes = useStyles();
-  const loading = useSelector((state) => state.ui.loading);
-  const errors = useSelector((state) => state.ui.errors);
 
   return (
     <Grid container>
-      {comments.map((comment, index) => {
+      {comments?.map((comment, index) => {
         const { body, createdAt, userImage, userName } = comment;
         return (
           <Fragment key={createdAt}>

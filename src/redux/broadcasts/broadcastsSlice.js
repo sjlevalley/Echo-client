@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   broadcasts: [],
   broadcast: {},
+  userProfile: {},
   loading: false
 }
 
@@ -82,6 +83,27 @@ export const broadcastsSlice = createSlice({
         ...state,
         broadcasts: [action.payload, ...state.broadcasts]
       }
+    },
+    broadcastSliceSubmitComment(state, action) {
+      return {
+        ...state,
+        broadcast: {
+          ...state.broadcast,
+          comments: [action.payload, ...state.broadcast.comments]
+        }
+      }
+    },
+    broadcastsSliceSetUserProfile(state, action) {
+      return {
+        ...state,
+        userProfile: action.payload
+      }
+    },
+    broadcastsSliceClearUserProfile(state, action) {
+      return {
+        ...state,
+        userProfile: {}
+      }
     }
   }
 })
@@ -95,7 +117,10 @@ export const {
   broadcastSliceDeleteBroadcast,
   broadcastSlicePostBroadcast,
   broadcastSliceSetBroadcast,
-  broadcastSliceClearBroadcast
+  broadcastSliceClearBroadcast,
+  broadcastSliceSubmitComment,
+  broadcastsSliceSetUserProfile,
+  broadcastsSliceClearUserProfile
 } = broadcastsSlice.actions
 
 export default broadcastsSlice.reducer

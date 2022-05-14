@@ -19,10 +19,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loadingUser (state, action) {
+    loadingUser(state, action) {
       return { ...state, loading: true }
     },
-    setUserToken (state, action) {
+    setUserToken(state, action) {
       const userTokenData = action.payload
       return {
         ...state,
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
         authenticated: true
       }
     },
-    setUserData (state, action) {
+    setUserData(state, action) {
       const userData = action.payload
       return {
         ...state,
@@ -48,7 +48,7 @@ export const userSlice = createSlice({
         notifications: userData.notifications
       }
     },
-    clearUser (state, action) {
+    clearUser(state, action) {
       return {
         ...state,
         user: null,
@@ -57,7 +57,7 @@ export const userSlice = createSlice({
         loading: false
       }
     },
-    userSliceLikeBroadcast (state, action) {
+    userSliceLikeBroadcast(state, action) {
       return {
         ...state,
         likes: [
@@ -69,12 +69,25 @@ export const userSlice = createSlice({
         ]
       }
     },
-    userSliceUnlikeBroadcast (state, action) {
+    userSliceUnlikeBroadcast(state, action) {
       return {
         ...state,
         likes: state.likes.filter(
           like => like.broadcastId !== action.payload.broadcastId
         )
+      }
+    },
+    markNotificationsRead(state, action) {
+      const ids = action.payload
+      let updatedNotifications = state.notifications
+      updatedNotifications.forEach((n) => {
+        n.read = true
+        console.log(n)
+        return n
+      })
+      return {
+        ...state,
+        notifications: updatedNotifications
       }
     }
   }
@@ -88,7 +101,8 @@ export const {
   setUserData,
   setUserToken,
   userSliceLikeBroadcast,
-  userSliceUnlikeBroadcast
+  userSliceUnlikeBroadcast,
+  markNotificationsRead
 } = userSlice.actions
 
 export default userSlice.reducer

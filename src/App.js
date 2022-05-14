@@ -10,6 +10,7 @@ import './App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import User from './pages/User'
 
 // Components
 import Navbar from './components/layout/Navbar'
@@ -39,6 +40,7 @@ function App() {
             <Routes>
               <Route path='/login' element={<Login />} user={user} />
               <Route path='/signup' element={<Signup />} user={user} />
+              <Route exact path='/users/:userName' element={<User />} user={user} />
               <Route
                 path='/'
                 element={
