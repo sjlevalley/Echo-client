@@ -34,6 +34,7 @@ export const authSlice = createSlice({
     },
     setUserData(state, action) {
       const userData = action.payload
+      console.log(userData)
       return {
         ...state,
         loading: false,

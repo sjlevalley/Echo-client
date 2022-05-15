@@ -18,6 +18,7 @@ export const appPageTheme = {
     minWidth: 200,
   },
   btnContainer: {
+    display: 'flex',
     marginLeft: "auto",
     marginTop: "auto",
     height: "fit-content",
@@ -59,9 +60,6 @@ export const appPageTheme = {
     marginLeft: 20,
   },
   deleteButton: {
-    left: "75%",
-    top: "65%",
-    position: "absolute",
   },
   dialogContent: {
     padding: 20,

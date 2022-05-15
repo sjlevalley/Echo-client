@@ -44,14 +44,13 @@ function Broadcast({ broadcast }) {
     commentCount,
   } = broadcast;
 
-  // const viewComments = () => {
-  //   dispatch(getSingleBroadcastAction(broadcastId));
-  // };
+  const viewComments = () => {
+    dispatch(getSingleBroadcastAction(broadcastId));
+  };
 
-  const deleteButton =
-    authenticated && userName === user.userName ? (
-      <DeleteBroadcast broadcastId={broadcastId} />
-    ) : null;
+  const deleteButton = authenticated && userName === user.userName && (
+    <DeleteBroadcast broadcastId={broadcastId} />
+  );
 
   return (
     <Card className={classes.card}>
@@ -70,7 +69,6 @@ function Broadcast({ broadcast }) {
           {userName}
         </Typography>
 
-        {deleteButton}
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>
@@ -78,10 +76,7 @@ function Broadcast({ broadcast }) {
         <div className={classes.container}>
           <LikeButton broadcast={broadcast} />
           <span className={classes.span}>{likeCount} Likes</span>
-          <MyButton
-            tip="Comments"
-            // onClick={viewComments}
-          >
+          <MyButton tip="Comments" onClick={viewComments}>
             <ChatIcon fontSize="small" color="primary" />
           </MyButton>
           {commentCount === 1 ? (
@@ -92,6 +87,7 @@ function Broadcast({ broadcast }) {
         </div>
       </CardContent>
       <div className={classes.btnContainer}>
+        {deleteButton}
         <BroadcastDialog broadcastId={broadcastId} />
       </div>
     </Card>
