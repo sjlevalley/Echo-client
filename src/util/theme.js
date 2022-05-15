@@ -14,42 +14,19 @@ export const appPageTheme = {
       contrastText: '#fff'
     }
   },
-  typography: {
-    useNextVariants: true
+  broadcastCardImage: {
+    minWidth: 200,
   },
-  form: {
-    textAlign: 'center'
-  },
-  image: {
-    margin: '0px auto'
-  },
-  textField: {
-    margin: '10px auto'
-  },
-  pageTitle: {
-    margin: '10px auto'
+  btnContainer: {
+    marginLeft: "auto",
+    marginTop: "auto",
+    height: "fit-content",
   },
   button: {
     margin: '20px auto',
     float: 'right',
     position: 'relative',
     width: '100px'
-  },
-  customError: {
-    color: 'red',
-    fontSize: '0.8rem',
-    margin: '10px 0 0 0'
-  },
-  progress: {},
-  card: {
-    display: "flex",
-    marginBottom: 10,
-  },
-  span: {
-    fontSize: "12px",
-  },
-  broadcastCardImage: {
-    minWidth: 200,
   },
   container: {
     marginLeft: "-10px",
@@ -58,39 +35,19 @@ export const appPageTheme = {
     padding: 25,
     objectFit: "cover",
   },
-  btnContainer: {
-    marginLeft: "auto",
-    marginTop: "auto",
-    height: "fit-content",
+  customError: {
+    color: 'red',
+    fontSize: '0.8rem',
+    margin: '10px 0 0 0'
   },
-  invisibleSeparator: {
-    border: "none",
-    margin: 4,
-  },
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: "50%",
-    maxWidth: "100%",
-    objectFit: "cover",
-  },
-  dialogContent: {
-    padding: 20,
+  card: {
+    display: "flex",
+    marginBottom: 10,
   },
   closeButton: {
     position: "relative",
     left: "92%",
     width: "50px",
-  },
-  spinnerDiv: {
-    textAlign: "center",
-    marginTop: 50,
-    marginBottom: 50,
   },
   commentImage: {
     maxWidth: "100%",
@@ -106,18 +63,21 @@ export const appPageTheme = {
     top: "65%",
     position: "absolute",
   },
-  submitButton: {
-    float: "right",
-    margin: "1rem 0",
-  },
-  progressSpinner: {
-    position: "absolute",
+  dialogContent: {
+    padding: 20,
   },
   editDetailsBtn: {
     float: "right",
   },
-  paper: {
-    padding: 20,
+  form: {
+    textAlign: 'center'
+  },
+  hr: {
+    border: "none",
+    margin: "0 0 10px 0",
+  },
+  image: {
+    margin: '0px auto'
   },
   imageWrapper: {
     textAlign: "center",
@@ -126,6 +86,32 @@ export const appPageTheme = {
       position: "absolute",
       top: "80%",
       left: "70%",
+    },
+  },
+  invisibleSeparator: {
+    border: "none",
+    margin: 4,
+  },
+  pageTitle: {
+    margin: '10px auto'
+  },
+  profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: "50%",
+    maxWidth: "100%",
+    objectFit: "cover",
+  },
+  progress: {},
+  progressSpinner: {
+    position: "absolute",
+  },
+  paper: {
+    padding: 20,
+  },
+  profileBtn: {
+    "&:hover": {
+      cursor: "pointer",
     },
   },
   profileDetails: {
@@ -137,16 +123,30 @@ export const appPageTheme = {
       color: "#00bcd4",
     },
   },
-  hr: {
-    border: "none",
-    margin: "0 0 10px 0",
+  span: {
+    fontSize: "12px",
   },
-  profileBtn: {
-    "&:hover": {
-      cursor: "pointer",
-    },
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: 50,
+    marginBottom: 50,
+  },
+  submitButton: {
+    float: "right",
+    margin: "1rem 0",
+  },
+  typography: {
+    useNextVariants: true
+  },
+  textField: {
+    margin: '10px auto'
   },
   userNameLink: {
     textDecoration: "none !important",
+  },
+  visibleSeparator: {
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: "20px",
   },
 }
