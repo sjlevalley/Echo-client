@@ -53,11 +53,7 @@ function Signup() {
   };
 
   const handleChange = (e) => {
-    let updated = { ...errors };
-    delete updated[`${e.target.name}`];
-    if (errors[[e.target.name]]) {
-      dispatch(clearError(updated));
-    }
+    dispatch(clearError({}));
     if (e.target.name === "email") setEmail(() => e.target.value);
     if (e.target.name === "password") setPassword(() => e.target.value);
     if (e.target.name === "confirmPassword")
@@ -77,8 +73,8 @@ function Signup() {
           <TextField
             id="email"
             name="email"
-            helperText={errors.email}
-            error={errors.email ? true : false}
+            helperText={errors?.email}
+            error={errors?.email ? true : false}
             type="email"
             label="Email"
             className={classes.textField}
@@ -90,8 +86,8 @@ function Signup() {
           <TextField
             id="password"
             name="password"
-            helperText={errors.password}
-            error={errors.password ? true : false}
+            helperText={errors?.password}
+            error={errors?.password ? true : false}
             type="password"
             label="Password"
             className={classes.textField}
@@ -102,8 +98,8 @@ function Signup() {
           <TextField
             id="confirmPassword"
             name="confirmPassword"
-            helperText={errors.confirmPassword}
-            error={errors.confirmPassword ? true : false}
+            helperText={errors?.confirmPassword}
+            error={errors?.confirmPassword ? true : false}
             type="password"
             label="Confirm Password"
             className={classes.textField}
@@ -114,8 +110,8 @@ function Signup() {
           <TextField
             id="userName"
             name="userName"
-            helperText={errors.userName}
-            error={errors.userName ? true : false}
+            helperText={errors?.userName}
+            error={errors?.userName ? true : false}
             type="text"
             label="Username"
             className={classes.textField}
@@ -123,7 +119,7 @@ function Signup() {
             onChange={handleChange}
             fullWidth
           />
-          {errors.general && (
+          {errors?.general && (
             <Typography variant="body2" className={classes.customError}>
               {errors.general}
             </Typography>
