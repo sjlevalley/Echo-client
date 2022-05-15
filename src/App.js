@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from './redux/user/userActions'
+import { logout } from './redux/auth/authActions'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { createTheme } from '@material-ui/core/styles'
@@ -26,7 +26,7 @@ const theme = createTheme(appPageTheme)
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user.user)
+  const user = useSelector(state => state.auth.user)
 
   useEffect(() => {
     if (user?.token_exp * 1000 < Date.now()) {

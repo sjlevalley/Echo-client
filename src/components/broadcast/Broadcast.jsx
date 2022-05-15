@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Broadcast({ broadcast }) {
   const classes = useStyles();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth);
   dayjs.extend(relativeTime);
 
   const { authenticated } = user;

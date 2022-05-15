@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 function CommentForm({ broadcastId }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth);
   const errors = useSelector((state) => state.ui.errors);
   const [commentText, setCommentText] = useState("");
 

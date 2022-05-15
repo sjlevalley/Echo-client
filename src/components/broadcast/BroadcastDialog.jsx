@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
@@ -32,7 +32,7 @@ function BroadcastDialog({ broadcastId }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const broadcast = useSelector((state) => state.broadcasts.broadcast);
-  const loading = useSelector((state) => state.ui.loading);
+  const [loading, setLoading] = useState(false);
 
   const {
     body,
@@ -45,7 +45,7 @@ function BroadcastDialog({ broadcastId }) {
   } = broadcast;
 
   const handleOpen = () => {
-    dispatch(getSingleBroadcastAction(broadcastId));
+    dispatch(getSingleBroadcastAction(broadcastId, setLoading));
   };
   const handleClose = () => {
     dispatch(clearBroadcastBroadcastAction());

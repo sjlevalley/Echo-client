@@ -13,7 +13,7 @@ import { Edit as EditIcon } from "@mui/icons-material";
 import { makeStyles } from "@material-ui/core/styles";
 // Components
 import MyButton from "../../util/MyButton";
-import { editUserDetails } from "../../redux/user/userActions";
+import { editUserDetails } from "../../redux/auth/authActions";
 
 const useStyles = makeStyles((theme) => ({
   button: theme.editDetailsBtn,
@@ -29,9 +29,9 @@ function EditDetails() {
   const [location, setLocation] = useState("");
   const [website, setWebsite] = useState("");
 
-  const userBio = useSelector((state) => state.user.bio);
-  const userLocation = useSelector((state) => state.user.location);
-  const userWebsite = useSelector((state) => state.user.website);
+  const userBio = useSelector((state) => state.auth.bio);
+  const userLocation = useSelector((state) => state.auth.location);
+  const userWebsite = useSelector((state) => state.auth.website);
 
   useEffect(() => {
     setBio(() => (userBio ? userBio : ""));

@@ -17,7 +17,7 @@ import {
 import EditDetails from "./EditDetails";
 import MyButton from "../../util/MyButton";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
-import { uploadImage, logout } from "../../redux/user/userActions";
+import { uploadImage, logout } from "../../redux/auth/authActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: theme.paper,
@@ -33,8 +33,8 @@ function Profile() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const loading = useSelector((state) => state.user.loading);
-  const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.auth.loading);
+  const user = useSelector((state) => state.auth);
   const { authenticated, userName, bio, location, website, createdAt } = user;
 
   const handleImageChange = (e) => {

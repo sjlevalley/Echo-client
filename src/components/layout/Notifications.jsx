@@ -15,11 +15,11 @@ import {
   Chat as ChatIcon,
 } from "@mui/icons-material";
 // Components
-import { userActionsMarkNotificationsRead } from "../../redux/user/userActions";
+import { userActionsMarkNotificationsRead } from "../../redux/auth/authActions";
 
 function Notifications() {
   const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.user.notifications);
+  const notifications = useSelector((state) => state.auth.notifications);
   const [anchorEl, setAnchorEl] = useState(null);
   dayjs.extend(relativeTime);
 
@@ -99,7 +99,9 @@ function Notifications() {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        TransitionProps={onMenuOpened}
+        TransitionProps={{
+          onEntered: onMenuOpened,
+        }}
       >
         {notificationsMarkup}
       </Menu>

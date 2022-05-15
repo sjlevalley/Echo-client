@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+// MUI
+import { Grid } from "@material-ui/core";
+// Components
+import Broadcast from "../components/broadcast/Broadcast";
+import BroadcastSkeleton from "../util/BroadcastSkeleton";
+import ProfileSkeleton from "../util/ProfileSkeleton";
+import StaticProfile from "../components/profile/StaticProfile";
 import {
   getUserDataBroadcastAction,
   clearUserProfileBroadcastAction,
 } from "../redux/broadcasts/broadcastActions";
-import StaticProfile from "../components/profile/StaticProfile";
-import BroadcastSkeleton from "../util/BroadcastSkeleton";
-
-import Broadcast from "../components/broadcast/Broadcast";
-import { Grid } from "@material-ui/core";
 
 function User() {
   const dispatch = useDispatch();
@@ -41,11 +43,7 @@ function User() {
         {broadcastsMarkup}
       </Grid>
       <Grid item sm={4} xs={12}>
-        {profile ? (
-          <StaticProfile profile={profile} />
-        ) : (
-          <p>Loading User Profile...</p>
-        )}
+        {profile ? <StaticProfile profile={profile} /> : <ProfileSkeleton />}
       </Grid>
     </Grid>
   );

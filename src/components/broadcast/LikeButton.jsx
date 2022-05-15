@@ -13,7 +13,7 @@ import {
 
 function LikeButton({ broadcast }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth);
   const { authenticated } = user;
   const { broadcastId } = broadcast;
 

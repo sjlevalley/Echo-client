@@ -15,8 +15,8 @@ const initialState = {
   loading: false
 }
 
-export const userSlice = createSlice({
-  name: 'user',
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
     loadingUser(state, action) {
@@ -53,7 +53,7 @@ export const userSlice = createSlice({
         ...initialState
       }
     },
-    userSliceLikeBroadcast(state, action) {
+    authSliceLikeBroadcast(state, action) {
       return {
         ...state,
         likes: [
@@ -65,7 +65,7 @@ export const userSlice = createSlice({
         ]
       }
     },
-    userSliceUnlikeBroadcast(state, action) {
+    authSliceUnlikeBroadcast(state, action) {
       return {
         ...state,
         likes: state.likes.filter(
@@ -89,9 +89,9 @@ export const {
   clearUser,
   setUserData,
   setUserToken,
-  userSliceLikeBroadcast,
-  userSliceUnlikeBroadcast,
+  authSliceLikeBroadcast,
+  authSliceUnlikeBroadcast,
   markNotificationsRead
-} = userSlice.actions
+} = authSlice.actions
 
-export default userSlice.reducer
+export default authSlice.reducer

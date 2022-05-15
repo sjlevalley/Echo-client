@@ -14,9 +14,9 @@ import {
   broadcastsSliceClearUserProfile
 } from './broadcastsSlice'
 import {
-  userSliceLikeBroadcast,
-  userSliceUnlikeBroadcast
-} from '../user/userSlice'
+  authSliceLikeBroadcast,
+  authSliceUnlikeBroadcast
+} from '../auth/authSlice'
 import {
   loadingUITrue,
   setError,
@@ -44,7 +44,7 @@ export const likeBroadcastAction = broadcastId => {
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/like`)
       dispatch(broadcastSliceLikeBroadcast(data))
-      dispatch(userSliceLikeBroadcast(data))
+      dispatch(authSliceLikeBroadcast(data))
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
@@ -57,7 +57,7 @@ export const unlikeBroadcastAction = broadcastId => {
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}/unlike`)
       dispatch(broadcastSliceUnlikeBroadcast(data))
-      dispatch(userSliceUnlikeBroadcast(data))
+      dispatch(authSliceUnlikeBroadcast(data))
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
@@ -92,10 +92,10 @@ export const postBroadcastAction = (newBroadcast, handleClose, setBody) => {
   }
 }
 
-export const getSingleBroadcastAction = (broadcastId) => {
+export const getSingleBroadcastAction = (broadcastId, setLoading) => {
   return async dispatch => {
+    setLoading(() => true)
     dispatch(clearError())
-    dispatch(loadingUITrue())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}`)
       dispatch(broadcastSliceSetBroadcast(data))
@@ -103,7 +103,7 @@ export const getSingleBroadcastAction = (broadcastId) => {
       console.error(e)
       dispatch(setError(e.response.data))
     }
-    dispatch(loadingUIFalse())
+    setLoading(() => false)
   }
 }
 

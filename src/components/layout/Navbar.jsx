@@ -12,7 +12,7 @@ import Notifications from "./Notifications";
 import PostBroadcast from "../broadcast/PostBroadcast";
 
 function Navbar() {
-  const authenticated = useSelector((state) => state.user.authenticated);
+  const authenticated = useSelector((state) => state.auth.authenticated);
 
   return (
     <div>

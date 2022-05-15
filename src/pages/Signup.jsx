@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 // Components
-import { signup } from "../redux/user/userActions";
+import { signup } from "../redux/auth/authActions";
 import { clearError } from "../redux/ui/uiSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +35,7 @@ function Signup() {
 
   const errors = useSelector((state) => state.ui.errors);
   const loading = useSelector((state) => state.ui.loading);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (user) navigate("/");
