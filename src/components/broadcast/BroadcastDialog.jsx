@@ -32,7 +32,7 @@ function BroadcastDialog({ broadcastId }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const broadcast = useSelector((state) => state.broadcasts.broadcast);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.broadcasts.loading);
 
   const {
     body,
@@ -45,7 +45,7 @@ function BroadcastDialog({ broadcastId }) {
   } = broadcast;
 
   const handleOpen = () => {
-    dispatch(getSingleBroadcastAction(broadcastId, setLoading));
+    dispatch(getSingleBroadcastAction(broadcastId));
   };
   const handleClose = () => {
     dispatch(clearBroadcastBroadcastAction());
@@ -90,7 +90,7 @@ function BroadcastDialog({ broadcastId }) {
           )}
         </Grid>
         <hr className={classes.visibleSeparator} />
-        <CommentForm broadcastId={broadcastId} />
+        <CommentForm />
         <Comments comments={comments} />
       </Grid>
     );

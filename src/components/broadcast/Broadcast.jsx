@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -15,6 +15,7 @@ import BroadcastDialog from "./BroadcastDialog";
 import DeleteBroadcast from "./DeleteBroadcast";
 import LikeButton from "./LikeButton";
 import MyButton from "../../util/MyButton";
+import { getSingleBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
   card: theme.card,
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Broadcast({ broadcast }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   dayjs.extend(relativeTime);
 
@@ -41,6 +43,10 @@ function Broadcast({ broadcast }) {
     likeCount,
     commentCount,
   } = broadcast;
+
+  // const viewComments = () => {
+  //   dispatch(getSingleBroadcastAction(broadcastId));
+  // };
 
   const deleteButton =
     authenticated && userName === user.userName ? (
@@ -72,7 +78,10 @@ function Broadcast({ broadcast }) {
         <div className={classes.container}>
           <LikeButton broadcast={broadcast} />
           <span className={classes.span}>{likeCount} Likes</span>
-          <MyButton tip="Comments">
+          <MyButton
+            tip="Comments"
+            // onClick={viewComments}
+          >
             <ChatIcon fontSize="small" color="primary" />
           </MyButton>
           {commentCount === 1 ? (

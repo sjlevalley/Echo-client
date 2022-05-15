@@ -11,7 +11,9 @@ import {
   broadcastSliceClearBroadcast,
   broadcastSliceSubmitComment,
   broadcastsSliceSetUserProfile,
-  broadcastsSliceClearUserProfile
+  broadcastsSliceClearUserProfile,
+  loadingBroadcast,
+  broadcastSliceIncrementCommentCount
 } from './broadcastsSlice'
 import {
   authSliceLikeBroadcast,
@@ -92,10 +94,10 @@ export const postBroadcastAction = (newBroadcast, handleClose, setBody) => {
   }
 }
 
-export const getSingleBroadcastAction = (broadcastId, setLoading) => {
+export const getSingleBroadcastAction = (broadcastId) => {
   return async dispatch => {
-    setLoading(() => true)
     dispatch(clearError())
+    dispatch(loadingBroadcast())
     try {
       const { data } = await axios.get(`/api/broadcast/${broadcastId}`)
       dispatch(broadcastSliceSetBroadcast(data))
@@ -103,7 +105,6 @@ export const getSingleBroadcastAction = (broadcastId, setLoading) => {
       console.error(e)
       dispatch(setError(e.response.data))
     }
-    setLoading(() => false)
   }
 }
 
@@ -113,6 +114,7 @@ export const submitCommentBroadcastAction = (broadcastId, commentData) => {
     try {
       const { data } = await axios.post(`/api/broadcast/${broadcastId}/comment`, commentData)
       dispatch(broadcastSliceSubmitComment(data))
+      dispatch(broadcastSliceIncrementCommentCount(data))
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))

@@ -15,21 +15,24 @@ const useStyles = makeStyles((theme) => ({
   button: theme.button,
 }));
 
-function CommentForm({ broadcastId }) {
+function CommentForm() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   const errors = useSelector((state) => state.ui.errors);
+  const broadcast = useSelector((state) => state.broadcasts.broadcast);
   const [commentText, setCommentText] = useState("");
 
   const { authenticated } = user;
 
   const handleSubmit = (e) => {
+    const { broadcastId } = broadcast;
     e.preventDefault();
     if (!commentText || commentText === "") {
       dispatch(setError({ comment: "Must not be empty" }));
       return;
     }
+    console.log(user);
     dispatch(submitCommentBroadcastAction(broadcastId, { body: commentText }));
     setCommentText(() => "");
   };

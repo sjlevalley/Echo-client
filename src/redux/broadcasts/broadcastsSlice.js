@@ -25,11 +25,15 @@ export const broadcastsSlice = createSlice({
     clearBroadcasts(state, action) {
       return { ...state, broadcasts: [] }
     },
+    loadingBroadcast(state, action) {
+      return { ...state, loading: true }
+    },
     broadcastSliceSetBroadcast(state, action) {
       const data = action.payload
       return {
         ...state,
-        broadcast: data
+        broadcast: data,
+        loading: false
       }
     },
     broadcastSliceClearBroadcast(state, action) {
@@ -89,9 +93,16 @@ export const broadcastsSlice = createSlice({
         ...state,
         broadcast: {
           ...state.broadcast,
+          commentCount: state.broadcast.commentCount + 1,
           comments: [action.payload, ...state.broadcast.comments]
         }
       }
+    },
+    broadcastSliceIncrementCommentCount(state, action) {
+      state.broadcasts.forEach((b) => {
+        if (b.broadcastId === action.payload.broadcastId) b.commentCount++
+      })
+      return state
     },
     broadcastsSliceSetUserProfile(state, action) {
       return {
@@ -120,7 +131,9 @@ export const {
   broadcastSliceClearBroadcast,
   broadcastSliceSubmitComment,
   broadcastsSliceSetUserProfile,
-  broadcastsSliceClearUserProfile
+  broadcastsSliceClearUserProfile,
+  loadingBroadcast,
+  broadcastSliceIncrementCommentCount
 } = broadcastsSlice.actions
 
 export default broadcastsSlice.reducer
