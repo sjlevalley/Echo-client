@@ -77,14 +77,14 @@ export const deleteBroadcastAction = broadcastId => {
   }
 }
 
-export const postBroadcastAction = newBroadcast => {
+export const postBroadcastAction = (newBroadcast, handleClose, setBody) => {
   return async dispatch => {
     dispatch(clearError())
-    dispatch(loadingUITrue())
     try {
       const { data } = await axios.post(`/api/broadcast`, newBroadcast)
+      handleClose()
+      setBody(() => "")
       dispatch(broadcastSlicePostBroadcast(data))
-      dispatch(loadingUIFalse())
     } catch (e) {
       console.error(e)
       dispatch(setError(e.response.data))
@@ -115,7 +115,7 @@ export const submitCommentBroadcastAction = (broadcastId, commentData) => {
       dispatch(broadcastSliceSubmitComment(data))
     } catch (e) {
       console.error(e)
-      dispatch(setError({ comment: 'Must not be blank' }))
+      dispatch(setError(e.response.data))
     }
     dispatch(loadingUIFalse())
   }

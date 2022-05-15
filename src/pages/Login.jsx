@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   image: theme.image,
   textField: theme.textField,
   pageTitle: theme.pageTitle,
-  button: theme.button,
+  button: { ...theme.button, float: "none" },
   customError: theme.customError,
   progress: theme.progress,
 }));

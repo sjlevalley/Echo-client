@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // Components
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { clearError } from "../../redux/ui/uiSlice";
+import { clearError, setError } from "../../redux/ui/uiSlice";
 import { submitCommentBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,14 +20,18 @@ function CommentForm({ broadcastId }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const errors = useSelector((state) => state.ui.errors);
-  const [commentText, setCommentText] = useState(null);
+  const [commentText, setCommentText] = useState("");
 
   const { authenticated } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!commentText || commentText === "") {
+      dispatch(setError({ comment: "Must not be empty" }));
+      return;
+    }
     dispatch(submitCommentBroadcastAction(broadcastId, { body: commentText }));
-    setCommentText(() => null);
+    setCommentText(() => "");
   };
 
   const handleChange = (e) => {

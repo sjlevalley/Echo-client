@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // Components
 import MyButton from "../../util/MyButton";
 import { postBroadcastAction } from "../../redux/broadcasts/broadcastActions";
+import { clearError, setError } from "../../redux/ui/uiSlice";
 
 const useStyles = makeStyles((theme) => ({
   textField: theme.textField,
@@ -29,7 +30,7 @@ function PostBroadcast() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [body, setBody] = useState("");
-  const [errors, setErrors] = useState({});
+  const errors = useSelector((state) => state.ui.errors);
 
   const handleOpen = () => {
     setIsOpen(() => true);
@@ -40,19 +41,19 @@ function PostBroadcast() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!body || body === "") {
-      setErrors({ body: "Must not be empty" });
+      dispatch(setError({ body: "Must not be empty" }));
       return;
     }
     dispatch(
       postBroadcastAction({
         body,
+        handleClose,
+        setBody,
       })
     );
-    setBody(() => "");
-    handleClose();
   };
   const handleChange = (e) => {
-    setErrors({});
+    dispatch(clearError());
     setBody(() => e.target.value);
   };
 

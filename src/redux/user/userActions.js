@@ -20,11 +20,11 @@ export const login = (userData, navigate) => {
         token_exp: token.exp
       }
       dispatch(setUserToken(userInfo))
-      dispatch(loadingUIFalse())
       navigate('/')
     } catch (e) {
       dispatch(setError(e.response.data))
     }
+    dispatch(loadingUIFalse())
   }
 }
 
@@ -35,17 +35,18 @@ export const signup = (userData, navigate) => {
       const { data } = await axios.post('/api/signup', userData)
       let { token } = data
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      dispatch(getUserData())
       token = jwtDecode(token)
       const userInfo = {
         email: token.email,
         token_exp: token.exp
       }
       dispatch(setUserToken(userInfo))
-      dispatch(loadingUIFalse())
       navigate('/')
     } catch (e) {
       dispatch(setError(e.response.data))
     }
+    dispatch(loadingUIFalse())
   }
 }
 
@@ -77,7 +78,6 @@ export const uploadImage = formData => {
     dispatch(loadingUser())
     try {
       const { data } = await axios.post('/api/user/image', formData)
-      console.log(data)
       // Maybe throw an alert if successful
       dispatch(getUserData())
     } catch (e) {
@@ -92,7 +92,6 @@ export const editUserDetails = userDetails => {
     dispatch(loadingUser())
     try {
       const { data } = await axios.post('/api/user', userDetails)
-      console.log(data)
       // Maybe throw a notification if successful
       dispatch(getUserData())
     } catch (e) {
