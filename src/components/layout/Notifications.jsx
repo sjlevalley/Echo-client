@@ -58,8 +58,8 @@ function Notifications() {
   const notificationsMarkup =
     notifications && notifications.length > 0 ? (
       notifications.map((n) => {
+        const createdAt = n.createdAt;
         const verb = n.type === "like" ? "liked" : "commented on";
-        const time = dayjs(n.createdAt).fromNow;
         const iconColor = n.read ? "primary" : "error";
         const icon =
           n.type === "like" ? (
@@ -77,7 +77,7 @@ function Notifications() {
               variant="body1"
               to={`/users/${n.recipient}/broadcast/${n.broadcastId}`}
             >
-              {n.sender} {verb} your scream {time}
+              {n.sender} {verb} your broadcast - ({dayjs(createdAt).fromNow()})
             </Typography>
           </MenuItem>
         );

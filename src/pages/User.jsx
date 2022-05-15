@@ -11,6 +11,8 @@ import StaticProfile from "../components/profile/StaticProfile";
 import {
   getUserDataBroadcastAction,
   clearUserProfileBroadcastAction,
+  getSingleBroadcastAction,
+  clearBroadcastBroadcastAction,
 } from "../redux/broadcasts/broadcastActions";
 
 function User() {
@@ -20,13 +22,23 @@ function User() {
   const loading = useSelector((state) => state.ui.loading);
   const profile = useSelector((state) => state.broadcasts.userProfile);
 
+  const { userName, broadcastId } = params;
+
   useEffect(() => {
-    const userName = params.userName;
     dispatch(getUserDataBroadcastAction(userName));
     return () => {
       dispatch(clearUserProfileBroadcastAction());
     };
-  }, [dispatch]);
+  }, [dispatch, userName]);
+
+  useEffect(() => {
+    if (broadcastId) {
+      dispatch(getSingleBroadcastAction(broadcastId));
+    }
+    return () => {
+      dispatch(clearBroadcastBroadcastAction());
+    };
+  }, [dispatch, broadcastId]);
 
   const broadcastsMarkup = loading ? (
     <BroadcastSkeleton />

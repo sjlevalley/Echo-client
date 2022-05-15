@@ -44,6 +44,7 @@ function App() {
               <Route path='/login' element={<Login />} user={user} />
               <Route path='/signup' element={<Signup />} user={user} />
               <Route exact path='/users/:userName' element={<User />} user={user} />
+              <Route exact path="/users/:userName/broadcast/:broadcastId" element={<User />} user={user} />
               <Route
                 path='/'
                 element={
