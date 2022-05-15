@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from './redux/user/userActions'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -18,6 +19,8 @@ import PrivateRoute from './util/PrivateRoute'
 
 // Utils
 import { appPageTheme } from './util/theme'
+
+axios.defaults.baseURL = 'https://us-central1-echo-726ac.cloudfunctions.net'
 
 const theme = createTheme(appPageTheme)
 

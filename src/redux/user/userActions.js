@@ -54,7 +54,6 @@ export const logout = () => {
     try {
       delete axios.defaults.headers.common['Authorization']
       dispatch(clearUser())
-      dispatch(loadingUIFalse())
     } catch (e) {
       dispatch(setError(e.response.data))
     }
@@ -108,9 +107,9 @@ export const userActionsMarkNotificationsRead = (unreadNotificationsIds) => {
     try {
       const { data } = await axios.post('/api/notifications', unreadNotificationsIds)
       // TODO: Data is a message object here, handle accordingly
-      // dispatch(markNotificationsRead())
+      dispatch(markNotificationsRead())
     } catch (e) {
-      dispatch(setError(e.response.data))
+      dispatch(setError(e.response?.data))
       console.error(e)
     }
   }

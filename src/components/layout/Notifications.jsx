@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import { userActionsMarkNotificationsRead } from "../../redux/user/userActions";
 
 import Typography from "@material-ui/core/Typography";
@@ -10,7 +9,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import Badge from "@material-ui/core/Badge";
 import {
   Notifications as NotificationsIcon,
@@ -18,16 +16,8 @@ import {
   Chat as ChatIcon,
 } from "@mui/icons-material";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    display: "flex",
-    marginBottom: 10,
-  },
-}));
-
 function Notifications() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const notifications = useSelector((state) => state.user.notifications);
   const [anchorEl, setAnchorEl] = useState(null);
   dayjs.extend(relativeTime);
@@ -43,13 +33,6 @@ function Notifications() {
     unreadNotificationsIds = unreadNotificationsIds.map(
       (n) => n.notificationId
     );
-    let updatedNotifications = [...notifications];
-    notifications.forEach((n) => updatedNotifications.push(n));
-    updatedNotifications.forEach((n) => {
-      n.read = true;
-      return n;
-    });
-    console.log(updatedNotifications);
     dispatch(userActionsMarkNotificationsRead(unreadNotificationsIds));
   };
 
@@ -76,7 +59,7 @@ function Notifications() {
       notifications.map((n) => {
         const verb = n.type === "like" ? "liked" : "commented on";
         const time = dayjs(n.createdAt).fromNow;
-        const iconColor = n.read ? "secondary" : "primary";
+        const iconColor = n.read ? "primary" : "error";
         const icon =
           n.type === "like" ? (
             <FavoriteIcon color={iconColor} style={{ marginRight: 10 }} />

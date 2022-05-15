@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import {
@@ -6,15 +6,11 @@ import {
   clearUserProfileBroadcastAction,
 } from "../redux/broadcasts/broadcastActions";
 import StaticProfile from "../components/profile/StaticProfile";
+import BroadcastSkeleton from "../util/BroadcastSkeleton";
 
-import axios from "axios";
 import Broadcast from "../components/broadcast/Broadcast";
-import {
-  Dialog,
-  DialogContent,
-  CircularProgress,
-  Grid,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+
 function User() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -31,7 +27,7 @@ function User() {
   }, [dispatch]);
 
   const broadcastsMarkup = loading ? (
-    <p>Loading Data...</p>
+    <BroadcastSkeleton />
   ) : broadcasts.length === 0 ? (
     <p>No Broadcasts Yet from this User</p>
   ) : (

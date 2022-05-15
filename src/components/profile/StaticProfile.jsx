@@ -2,15 +2,14 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { Link as MuiLink } from "@mui/material";
-import { Typography, Paper, Button } from "@material-ui/core";
+import { Typography, Paper } from "@material-ui/core";
 import {
   LocationOn,
   CalendarToday,
   Link as IconLink,
-  Edit as EditIcon,
-  KeyboardReturn,
 } from "@mui/icons-material";
 import dayjs from "dayjs";
+import ProfileSkeleton from "../../util/ProfileSkeleton";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,7 +60,7 @@ function StaticProfile({ profile }) {
   return (
     <>
       {!profile.userName ? (
-        <p>Loading Profile...</p>
+        <ProfileSkeleton />
       ) : (
         <Paper className={classes.paper}>
           <div className={classes.profile}>

@@ -50,11 +50,7 @@ export const userSlice = createSlice({
     },
     clearUser(state, action) {
       return {
-        ...state,
-        user: null,
-        userDetails: null,
-        authenticated: false,
-        loading: false
+        ...initialState
       }
     },
     userSliceLikeBroadcast(state, action) {
@@ -78,17 +74,10 @@ export const userSlice = createSlice({
       }
     },
     markNotificationsRead(state, action) {
-      const ids = action.payload
-      let updatedNotifications = state.notifications
-      updatedNotifications.forEach((n) => {
+      state.notifications.forEach((n) => (
         n.read = true
-        console.log(n)
-        return n
-      })
-      return {
-        ...state,
-        notifications: updatedNotifications
-      }
+      ))
+      return state
     }
   }
 })

@@ -6,18 +6,21 @@ import { fetchAllBroadcasts } from "../redux/broadcasts/broadcastActions";
 
 import Profile from "../components/profile/Profile";
 import Broadcast from "../components/broadcast/Broadcast";
+import BroadcastSkeleton from "../util/BroadcastSkeleton";
 
 function Home() {
   const dispatch = useDispatch();
   const broadcasts = useSelector((state) => state.broadcasts.broadcasts);
 
-  const recentBroadcasts = broadcasts ? (
-    broadcasts.map((broadcast) => (
-      <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />
-    ))
-  ) : (
-    <p key={Math.random()}>Loading...</p>
-  );
+  const recentBroadcasts =
+    broadcasts.length > 0 ? (
+      broadcasts.map((broadcast) => (
+        <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />
+      ))
+    ) : (
+      <BroadcastSkeleton />
+      // <p>Loading...</p>
+    );
 
   useEffect(() => {
     dispatch(fetchAllBroadcasts());
