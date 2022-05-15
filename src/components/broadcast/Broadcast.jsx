@@ -1,31 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import { getSingleBroadcastAction } from "../../redux/broadcasts/broadcastActions";
-
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+// MUI
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-
 import ChatIcon from "@mui/icons-material/Chat";
-
-import MyButton from "../../util/MyButton";
-import LikeButton from "./LikeButton";
-import DeleteBroadcast from "./DeleteBroadcast";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+// Components
 import BroadcastDialog from "./BroadcastDialog";
+import DeleteBroadcast from "./DeleteBroadcast";
+import LikeButton from "./LikeButton";
+import MyButton from "../../util/MyButton";
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    display: "flex",
-    marginBottom: 10,
-  },
-  span: {
-    fontSize: "12px",
-  },
+  card: theme.card,
+  span: theme.span,
   container: {
     marginLeft: "-10px",
   },
@@ -35,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
   content: {
     padding: 25,
     objectFit: "cover",
+  },
+  btnContainer: {
+    marginLeft: "auto",
+    marginTop: "auto",
+    height: "fit-content",
   },
 }));
 
@@ -94,8 +92,10 @@ function Broadcast({ broadcast }) {
             <span>{commentCount} Comments</span>
           )}
         </div>
-        <BroadcastDialog broadcastId={broadcastId} />
       </CardContent>
+      <div className={classes.btnContainer}>
+        <BroadcastDialog broadcastId={broadcastId} />
+      </div>
     </Card>
   );
 }

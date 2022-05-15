@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { userActionsMarkNotificationsRead } from "../../redux/user/userActions";
-
-import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+// MUI
+import Badge from "@material-ui/core/Badge";
+import IconButton from "@mui/material/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@material-ui/core/Badge";
+import Typography from "@material-ui/core/Typography";
 import {
   Notifications as NotificationsIcon,
   Favorite as FavoriteIcon,
   Chat as ChatIcon,
 } from "@mui/icons-material";
+// Components
+import { userActionsMarkNotificationsRead } from "../../redux/user/userActions";
 
 function Notifications() {
   const dispatch = useDispatch();
@@ -87,7 +88,6 @@ function Notifications() {
 
   return (
     <>
-      {/* <Tooltip placement="top" title="notifications"> */}
       <IconButton
         aria-owns={anchorEl ? "simple-menu" : undefined}
         aria-haspopup="true"
@@ -95,12 +95,11 @@ function Notifications() {
       >
         {notificationsIcon}
       </IconButton>
-      {/* </Tooltip> */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        onEntered={onMenuOpened}
+        TransitionProps={onMenuOpened}
       >
         {notificationsMarkup}
       </Menu>

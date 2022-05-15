@@ -19,7 +19,6 @@ function Home() {
       ))
     ) : (
       <BroadcastSkeleton />
-      // <p>Loading...</p>
     );
 
   useEffect(() => {

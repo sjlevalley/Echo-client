@@ -1,15 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+// MUI
+import { Button, Paper, Typography } from "@material-ui/core";
 import { Link as MuiLink } from "@mui/material";
-import { uploadImage, logout } from "../../redux/user/userActions";
-import ProfileSkeleton from "../../util/ProfileSkeleton";
-
-import MyButton from "../../util/MyButton";
-
-import { Typography, Paper, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   LocationOn,
   CalendarToday,
@@ -17,7 +13,11 @@ import {
   Edit as EditIcon,
   KeyboardReturn,
 } from "@mui/icons-material";
+// Components
 import EditDetails from "./EditDetails";
+import MyButton from "../../util/MyButton";
+import ProfileSkeleton from "../../util/ProfileSkeleton";
+import { uploadImage, logout } from "../../redux/user/userActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 function Profile() {
   const dispatch = useDispatch();
   const classes = useStyles();
+
   const loading = useSelector((state) => state.user.loading);
   const user = useSelector((state) => state.user);
   const { authenticated, userName, bio, location, website, createdAt } = user;

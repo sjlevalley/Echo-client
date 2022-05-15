@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+// MUI
 import { Grid } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { submitCommentBroadcastAction } from "../../redux/broadcasts/broadcastActions";
+// Components
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { clearError } from "../../redux/ui/uiSlice";
+import { submitCommentBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: "20px auto",
+    float: "right",
     position: "relative",
     width: "100px",
   },
@@ -29,7 +31,6 @@ function CommentForm({ broadcastId }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const errors = useSelector((state) => state.ui.errors);
-  const loading = useSelector((state) => state.ui.loading);
   const [commentText, setCommentText] = useState(null);
 
   const { authenticated } = user;
@@ -51,7 +52,7 @@ function CommentForm({ broadcastId }) {
         <TextField
           name="commentText "
           type="text"
-          label="Leave a comment"
+          label="Leave a Comment"
           error={errors?.comment ? true : false}
           helperText={errors?.comment}
           onChange={handleChange}
@@ -67,7 +68,7 @@ function CommentForm({ broadcastId }) {
           Submit
         </Button>
       </form>
-      <hr className={classes.visibleSeparator} />
+      {/* <hr className={classes.visibleSeparator} /> */}
     </Grid>
   ) : null;
   return <>{commentFormMarkup}</>;

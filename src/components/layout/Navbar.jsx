@@ -1,19 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 // Import MUI components
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
-import {
-  Home as HomeIcon,
-  Notifications as NotificationsIcon,
-} from "@mui/icons-material";
-
-import PostBroadcast from "../broadcast/PostBroadcast";
+import { Home as HomeIcon } from "@mui/icons-material";
+// Components
 import MyButton from "../../util/MyButton";
 import Notifications from "./Notifications";
+import PostBroadcast from "../broadcast/PostBroadcast";
 
 function Navbar() {
   const authenticated = useSelector((state) => state.user.authenticated);

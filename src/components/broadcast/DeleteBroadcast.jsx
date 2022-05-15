@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+// MUI
 import { makeStyles } from "@material-ui/core/styles";
-
-import { deleteBroadcastAction } from "../../redux/broadcasts/broadcastActions";
-
 import { DialogActions, DialogTitle, Dialog, Button } from "@material-ui/core";
-
+// Components
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
 import MyButton from "../../util/MyButton";
+import { deleteBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
   deleteButton: {

@@ -49,9 +49,9 @@ function Login() {
   const loading = useSelector((state) => state.ui.loading);
   const user = useSelector((state) => state.user.user);
 
-  // useEffect(() => {
-  //   if (user) navigate("/");
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
@@ -64,11 +64,7 @@ function Login() {
   };
 
   const handleChange = (e) => {
-    let updated = { ...errors };
-    delete updated[`${e?.target.name}`];
-    if (errors[[e?.target.name]]) {
-      dispatch(clearError(updated));
-    }
+    dispatch(clearError({}));
     if (e?.target.name === "email") setEmail(() => e?.target.value);
     if (e?.target.name === "password") setPassword(() => e?.target.value);
   };
@@ -91,7 +87,7 @@ function Login() {
             label="Email"
             className={classes.textField}
             value={email}
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             fullWidth
           />
 
@@ -104,7 +100,7 @@ function Login() {
             label="Password"
             className={classes.textField}
             value={password}
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             fullWidth
           />
           {errors?.e && (

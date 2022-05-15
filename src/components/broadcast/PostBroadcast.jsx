@@ -1,85 +1,80 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// MUI
 import {
   Button,
   TextField,
   Dialog,
   DialogContent,
   DialogTitle,
-  CircularProgress
-} from '@material-ui/core'
-import {
-  Add as AddIcon,
-  Close as CloseIcon
-} from '@mui/icons-material'
+  CircularProgress,
+} from "@material-ui/core";
+import { Add as AddIcon, Close as CloseIcon } from "@mui/icons-material";
+import { makeStyles } from "@material-ui/core/styles";
+// Components
+import MyButton from "../../util/MyButton";
+import { postBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
-import MyButton from '../../util/MyButton'
-import { postBroadcastAction } from '../../redux/broadcasts/broadcastActions'
-
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   textField: {
-    margin: '10px auto'
+    margin: "10px auto",
   },
   submitButton: {
-    // position: 'relative'
-    float: 'right',
-    margin: '1rem 0'
+    float: "right",
+    margin: "1rem 0",
   },
   progressSpinner: {
-    position: 'absolute'
+    position: "absolute",
   },
   closeButton: {
-    position: 'relative',
-    // left: '20%',
-    top: '10%'
-  }
-}))
+    position: "relative",
+    left: "92%",
+    width: "50px",
+  },
+}));
 
 function PostBroadcast() {
-  const dispatch = useDispatch()
-  const classes = useStyles()
-  const loading = useSelector(state => state.ui.loading)
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const loading = useSelector((state) => state.ui.loading);
 
-  const [isOpen, setIsOpen] = useState(false)
-  const [body, setBody] = useState('')
-  const [errors, setErrors] = useState({})
-  // const errors = useSelector(state => state.ui.errors)
+  const [isOpen, setIsOpen] = useState(false);
+  const [body, setBody] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleOpen = () => {
-    setIsOpen(() => true)
-  }
+    setIsOpen(() => true);
+  };
   const handleClose = () => {
-    setIsOpen(() => false)
-  }
-  const handleSubmit = e => {
-    e.preventDefault()
-    if (!body || body === '') {
-      setErrors({ body: 'Must not be empty' })
-      return
+    setIsOpen(() => false);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!body || body === "") {
+      setErrors({ body: "Must not be empty" });
+      return;
     }
     dispatch(
       postBroadcastAction({
-        body
+        body,
       })
-    )
-    setBody(() => '')
-    handleClose()
-  }
-  const handleChange = e => {
-    setErrors({})
-    setBody(() => e.target.value)
-  }
+    );
+    setBody(() => "");
+    handleClose();
+  };
+  const handleChange = (e) => {
+    setErrors({});
+    setBody(() => e.target.value);
+  };
 
   return (
     <>
-      <MyButton onClick={handleOpen} tip='Create a Broadcast!'>
+      <MyButton onClick={handleOpen} tip="Create a Broadcast!">
         <AddIcon />
       </MyButton>
-      <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth='sm'>
+      <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
         <MyButton
-          tip='Close'
+          tip="Close"
           onClick={handleClose}
           tipClassName={classes.closeButton}
         >
@@ -89,12 +84,12 @@ function PostBroadcast() {
         <DialogContent>
           <form onSubmit={handleSubmit}>
             <TextField
-              name='body'
-              type='text'
-              label='BROADCAST!'
+              name="body"
+              type="text"
+              label="BROADCAST!"
               multiline
-              minRows='3'
-              placeholder='What do you want to Broadcast?'
+              minRows="3"
+              placeholder="What do you want to Broadcast?"
               error={errors?.body ? true : false}
               helperText={errors?.body}
               className={classes.textField}
@@ -102,9 +97,9 @@ function PostBroadcast() {
               fullWidth
             ></TextField>
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               className={classes.submitButton}
               disabled={loading}
             >
@@ -120,7 +115,7 @@ function PostBroadcast() {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
 
-export default PostBroadcast
+export default PostBroadcast;

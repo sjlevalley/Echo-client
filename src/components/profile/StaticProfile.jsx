@@ -1,15 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+// MUI
+
+// Components
+import ProfileSkeleton from "../../util/ProfileSkeleton";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link as MuiLink } from "@mui/material";
-import { Typography, Paper } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import {
-  LocationOn,
   CalendarToday,
   Link as IconLink,
+  LocationOn,
 } from "@mui/icons-material";
-import dayjs from "dayjs";
-import ProfileSkeleton from "../../util/ProfileSkeleton";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

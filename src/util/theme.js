@@ -1,3 +1,4 @@
+
 export const appPageTheme = {
   palette: {
     primary: {
@@ -38,5 +39,12 @@ export const appPageTheme = {
     fontSize: '0.8rem',
     margin: '10px 0 0 0'
   },
-  progress: {}
+  progress: {},
+  card: {
+    display: "flex",
+    marginBottom: 10,
+  },
+  span: {
+    fontSize: "12px",
+  },
 }

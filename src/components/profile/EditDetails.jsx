@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserDetails } from "../../redux/user/userActions";
+// MUI
 import {
   Button,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  TextField,
 } from "@material-ui/core";
 import { Edit as EditIcon } from "@mui/icons-material";
-
-import MyButton from "../../util/MyButton";
-
 import { makeStyles } from "@material-ui/core/styles";
+// Components
+import MyButton from "../../util/MyButton";
+import { editUserDetails } from "../../redux/user/userActions";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -27,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
 function EditDetails() {
   const dispatch = useDispatch();
   const classes = useStyles();
+
   const [bio, setBio] = useState("");
-  const [website, setWebsite] = useState("");
-  const [location, setLocation] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [location, setLocation] = useState("");
+  const [website, setWebsite] = useState("");
 
   const userBio = useSelector((state) => state.user.bio);
-  const userWebsite = useSelector((state) => state.user.website);
   const userLocation = useSelector((state) => state.user.location);
+  const userWebsite = useSelector((state) => state.user.website);
 
   useEffect(() => {
     setBio(() => (userBio ? userBio : ""));

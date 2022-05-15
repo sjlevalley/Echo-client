@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 import dayjs from "dayjs";
+// MUI
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   visibleSeparator: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   commentImage: {
     maxWidth: "100%",
     height: 100,
-    objectFit: "covey",
+    objectFit: "cover",
     borderRadius: "50%",
   },
   commentData: {
