@@ -20,46 +20,13 @@ import ProfileSkeleton from "../../util/ProfileSkeleton";
 import { uploadImage, logout } from "../../redux/user/userActions";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: 20,
-  },
-  imageWrapper: {
-    textAlign: "center",
-    position: "relative",
-    "& button": {
-      position: "absolute",
-      top: "80%",
-      left: "70%",
-    },
-  },
-  profileImage: {
-    width: 200,
-    height: 200,
-    objectFit: "cover",
-    maxWidth: "100%",
-    borderRadius: "50%",
-  },
-  profileDetails: {
-    textAlign: "center",
-    "& span, svg": {
-      verticalAlign: "middle",
-    },
-    "& a": {
-      color: "#00bcd4",
-    },
-  },
-  hr: {
-    border: "none",
-    margin: "0 0 10px 0",
-  },
-  button: {
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-  userNameLink: {
-    textDecoration: "none !important",
-  },
+  paper: theme.paper,
+  imageWrapper: theme.imageWrapper,
+  profileImage: theme.profileImage,
+  profileDetails: theme.profileDetails,
+  hr: theme.hr,
+  button: theme.profileBtn,
+  userNameLink: theme.userNameLink,
 }));
 
 function Profile() {

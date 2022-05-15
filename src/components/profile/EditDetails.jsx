@@ -16,12 +16,8 @@ import MyButton from "../../util/MyButton";
 import { editUserDetails } from "../../redux/user/userActions";
 
 const useStyles = makeStyles((theme) => ({
-  button: {
-    float: "right",
-  },
-  textField: {
-    margin: "10px auto",
-  },
+  button: theme.editDetailsBtn,
+  textField: theme.textField,
 }));
 
 function EditDetails() {

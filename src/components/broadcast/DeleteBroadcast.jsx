@@ -9,11 +9,7 @@ import MyButton from "../../util/MyButton";
 import { deleteBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
-  deleteButton: {
-    left: "75%",
-    top: "65%",
-    position: "absolute",
-  },
+  deleteButton: theme.deleteButton,
 }));
 
 function DeleteBroadcast({ broadcastId }) {

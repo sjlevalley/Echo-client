@@ -20,37 +20,12 @@ import {
 } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
-  textField: {
-    margin: "10px auto",
-  },
-  invisibleSeparator: {
-    border: "none",
-    margin: 4,
-  },
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: "50%",
-    objectFit: "cover",
-  },
-  dialogContent: {
-    padding: 20,
-  },
-  closeButton: {
-    position: "relative",
-    width: "50px",
-    left: "90%",
-  },
-  spinnerDiv: {
-    textAlign: "center",
-    marginTop: 50,
-    marginBottom: 50,
-  },
+  invisibleSeparator: theme.invisibleSeparator,
+  visibleSeparator: theme.visibleSeparator,
+  profileImage: theme.profileImage,
+  dialogContent: theme.dialogContent,
+  closeButton: theme.closeButton,
+  spinnerDiv: theme.spinnerDiv,
 }));
 
 function BroadcastDialog({ broadcastId }) {

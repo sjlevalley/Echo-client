@@ -7,24 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
-  invisibleSeparator: {
-    border: "none",
-    margin: 4,
-  },
-  commentImage: {
-    maxWidth: "100%",
-    height: 100,
-    objectFit: "cover",
-    borderRadius: "50%",
-  },
-  commentData: {
-    marginLeft: 20,
-  },
+  visibleSeparator: theme.visibleSeparator,
+  invisibleSeparator: theme.invisibleSeparator,
+  commentImage: theme.commentImage,
+  commentData: theme.commentData,
 }));
 
 function Comments({ comments }) {

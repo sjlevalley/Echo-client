@@ -19,21 +19,10 @@ import MyButton from "../../util/MyButton";
 const useStyles = makeStyles((theme) => ({
   card: theme.card,
   span: theme.span,
-  container: {
-    marginLeft: "-10px",
-  },
-  image: {
-    minWidth: 200,
-  },
-  content: {
-    padding: 25,
-    objectFit: "cover",
-  },
-  btnContainer: {
-    marginLeft: "auto",
-    marginTop: "auto",
-    height: "fit-content",
-  },
+  image: theme.broadcastCardImage,
+  container: theme.container,
+  content: theme.content,
+  btnContainer: theme.btnContainer,
 }));
 
 function Broadcast({ broadcast }) {

@@ -16,21 +16,10 @@ import MyButton from "../../util/MyButton";
 import { postBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
-  textField: {
-    margin: "10px auto",
-  },
-  submitButton: {
-    float: "right",
-    margin: "1rem 0",
-  },
-  progressSpinner: {
-    position: "absolute",
-  },
-  closeButton: {
-    position: "relative",
-    left: "92%",
-    width: "50px",
-  },
+  textField: theme.textField,
+  submitButton: theme.submitButton,
+  progressSpinner: theme.progressSpinner,
+  closeButton: theme.closeButton,
 }));
 
 function PostBroadcast() {

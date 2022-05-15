@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+// MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import AppIcon from "../images/icon.png";
@@ -8,34 +9,18 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+// Components
 import { login } from "../redux/user/userActions";
 import { clearError } from "../redux/ui/uiSlice";
 
 const useStyles = makeStyles((theme) => ({
-  form: {
-    textAlign: "center",
-  },
-  image: {
-    margin: "0px auto",
-  },
-  textField: {
-    margin: "10px auto",
-  },
-  pageTitle: {
-    margin: "10px auto",
-  },
-  button: {
-    margin: "20px auto",
-    position: "relative",
-    width: "100px",
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-    margin: "10px 0 0 0",
-  },
-  progress: {},
+  form: theme.form,
+  image: theme.image,
+  textField: theme.textField,
+  pageTitle: theme.pageTitle,
+  button: theme.button,
+  customError: theme.customError,
+  progress: theme.progress,
 }));
 
 function Login() {

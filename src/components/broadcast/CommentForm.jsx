@@ -10,20 +10,9 @@ import { clearError } from "../../redux/ui/uiSlice";
 import { submitCommentBroadcastAction } from "../../redux/broadcasts/broadcastActions";
 
 const useStyles = makeStyles((theme) => ({
-  textField: {
-    margin: "10px auto",
-  },
-  visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
-  button: {
-    margin: "20px auto",
-    float: "right",
-    position: "relative",
-    width: "100px",
-  },
+  textField: theme.textField,
+  visibleSeparator: theme.visibleSeparator,
+  button: theme.button,
 }));
 
 function CommentForm({ broadcastId }) {
