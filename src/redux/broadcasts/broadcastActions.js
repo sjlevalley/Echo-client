@@ -79,13 +79,11 @@ export const deleteBroadcastAction = broadcastId => {
   }
 }
 
-export const postBroadcastAction = (newBroadcast, handleClose, setBody) => {
+export const postBroadcastAction = (newBroadcast) => {
   return async dispatch => {
     dispatch(clearError())
     try {
       const { data } = await axios.post(`/api/broadcast`, newBroadcast)
-      handleClose()
-      setBody(() => "")
       dispatch(broadcastSlicePostBroadcast(data))
     } catch (e) {
       console.error(e)

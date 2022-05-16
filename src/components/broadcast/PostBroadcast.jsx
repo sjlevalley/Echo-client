@@ -47,10 +47,10 @@ function PostBroadcast() {
     dispatch(
       postBroadcastAction({
         body,
-        handleClose,
-        setBody,
       })
     );
+    handleClose();
+    setBody(() => "");
   };
   const handleChange = (e) => {
     dispatch(clearError());
