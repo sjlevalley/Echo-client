@@ -2,7 +2,13 @@
 import { setError } from '../ui/uiSlice'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { loadingUser, setUserToken, setUserData, clearUser, markNotificationsRead } from './authSlice'
+import {
+  loadingUser,
+  setUserToken,
+  setUserData,
+  clearUser,
+  markNotificationsRead
+} from './authSlice'
 import { loadingUIFalse, loadingUITrue } from '../ui/uiSlice'
 
 // Action Creator Thunk (A function that can return another function as well as execute asynchronous functions). This action creator is used to fetch the user data from the Firebase database.
@@ -101,10 +107,13 @@ export const editUserDetails = userDetails => {
   }
 }
 
-export const userActionsMarkNotificationsRead = (unreadNotificationsIds) => {
+export const userActionsMarkNotificationsRead = unreadNotificationsIds => {
   return async dispatch => {
     try {
-      const { data } = await axios.post('/api/notifications', unreadNotificationsIds)
+      const { data } = await axios.post(
+        '/api/notifications',
+        unreadNotificationsIds
+      )
       // TODO: Data is a message object here, handle accordingly
       dispatch(markNotificationsRead())
     } catch (e) {

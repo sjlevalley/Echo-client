@@ -19,10 +19,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loadingUser(state, action) {
+    loadingUser (state, action) {
       return { ...state, loading: true }
     },
-    setUserToken(state, action) {
+    setUserToken (state, action) {
       const userTokenData = action.payload
       return {
         ...state,
@@ -32,7 +32,7 @@ export const authSlice = createSlice({
         authenticated: true
       }
     },
-    setUserData(state, action) {
+    setUserData (state, action) {
       const userData = action.payload
       console.log(userData)
       return {
@@ -49,12 +49,12 @@ export const authSlice = createSlice({
         notifications: userData.notifications
       }
     },
-    clearUser(state, action) {
+    clearUser (state, action) {
       return {
         ...initialState
       }
     },
-    authSliceLikeBroadcast(state, action) {
+    authSliceLikeBroadcast (state, action) {
       return {
         ...state,
         likes: [
@@ -66,7 +66,7 @@ export const authSlice = createSlice({
         ]
       }
     },
-    authSliceUnlikeBroadcast(state, action) {
+    authSliceUnlikeBroadcast (state, action) {
       return {
         ...state,
         likes: state.likes.filter(
@@ -74,10 +74,8 @@ export const authSlice = createSlice({
         )
       }
     },
-    markNotificationsRead(state, action) {
-      state.notifications.forEach((n) => (
-        n.read = true
-      ))
+    markNotificationsRead (state, action) {
+      state.notifications.forEach(n => (n.read = true))
       return state
     }
   }

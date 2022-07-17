@@ -1,29 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "@material-ui/core";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Grid } from '@material-ui/core'
+// Local imports
+import Broadcast from '../components/broadcast/Broadcast'
+import BroadcastSkeleton from '../util/BroadcastSkeleton'
+import Profile from '../components/profile/Profile'
+import { fetchAllBroadcasts } from '../redux/broadcasts/broadcastActions'
 
-import { fetchAllBroadcasts } from "../redux/broadcasts/broadcastActions";
-
-import Profile from "../components/profile/Profile";
-import Broadcast from "../components/broadcast/Broadcast";
-import BroadcastSkeleton from "../util/BroadcastSkeleton";
-
-function Home() {
-  const dispatch = useDispatch();
-  const broadcasts = useSelector((state) => state.broadcasts.broadcasts);
+function Home () {
+  const dispatch = useDispatch()
+  const broadcasts = useSelector(state => state.broadcasts.broadcasts)
 
   const recentBroadcasts =
     broadcasts.length > 0 ? (
-      broadcasts.map((broadcast) => (
+      broadcasts.map(broadcast => (
         <Broadcast key={broadcast.broadcastId} broadcast={broadcast} />
       ))
     ) : (
       <BroadcastSkeleton />
-    );
+    )
 
   useEffect(() => {
-    dispatch(fetchAllBroadcasts());
-  }, [dispatch]);
+    dispatch(fetchAllBroadcasts())
+  }, [dispatch])
 
   return (
     <Grid container spacing={10}>
@@ -34,7 +33,7 @@ function Home() {
         <Profile />
       </Grid>
     </Grid>
-  );
+  )
 }
 
-export default Home;
+export default Home

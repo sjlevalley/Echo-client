@@ -1,54 +1,55 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 // MUI
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 // Components
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { clearError, setError } from "../../redux/ui/uiSlice";
-import { submitCommentBroadcastAction } from "../../redux/broadcasts/broadcastActions";
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import { clearError, setError } from '../../redux/ui/uiSlice'
+import { submitCommentBroadcastAction } from '../../redux/broadcasts/broadcastActions'
 
-const useStyles = makeStyles((theme) => ({
-  textField: theme.textField,
-  visibleSeparator: theme.visibleSeparator,
+const useStyles = makeStyles(theme => ({
   button: theme.button,
-}));
+  textField: theme.textField,
+  visibleSeparator: theme.visibleSeparator
+}))
 
-function CommentForm() {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
-  const errors = useSelector((state) => state.ui.errors);
-  const broadcast = useSelector((state) => state.broadcasts.broadcast);
-  const [commentText, setCommentText] = useState("");
+function CommentForm () {
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
-  const { authenticated } = user;
+  const broadcast = useSelector(state => state.broadcasts.broadcast)
+  const errors = useSelector(state => state.ui.errors)
+  const user = useSelector(state => state.auth)
 
-  const handleSubmit = (e) => {
-    const { broadcastId } = broadcast;
-    e.preventDefault();
-    if (!commentText || commentText === "") {
-      dispatch(setError({ comment: "Must not be empty" }));
-      return;
+  const [commentText, setCommentText] = useState('')
+
+  const { authenticated } = user
+
+  const handleSubmit = e => {
+    const { broadcastId } = broadcast
+    e.preventDefault()
+    if (!commentText || commentText === '') {
+      dispatch(setError({ comment: 'Must not be empty' }))
+      return
     }
-    console.log(user);
-    dispatch(submitCommentBroadcastAction(broadcastId, { body: commentText }));
-    setCommentText(() => "");
-  };
+    dispatch(submitCommentBroadcastAction(broadcastId, { body: commentText }))
+    setCommentText(() => '')
+  }
 
-  const handleChange = (e) => {
-    dispatch(clearError());
-    setCommentText(() => e.target.value);
-  };
+  const handleChange = e => {
+    dispatch(clearError())
+    setCommentText(() => e.target.value)
+  }
 
   const commentFormMarkup = authenticated ? (
-    <Grid item sm={12} style={{ textAlign: "center" }}>
+    <Grid item sm={12} style={{ textAlign: 'center' }}>
       <form onSubmit={handleSubmit}>
         <TextField
-          name="commentText "
-          type="text"
-          label="Leave a Comment"
+          name='commentText '
+          type='text'
+          label='Leave a Comment'
           error={errors?.comment ? true : false}
           helperText={errors?.comment}
           onChange={handleChange}
@@ -56,18 +57,17 @@ function CommentForm() {
           className={classes.textField}
         />
         <Button
-          type="submit"
-          variant="contained"
-          color="primary"
+          type='submit'
+          variant='contained'
+          color='primary'
           className={classes.button}
         >
           Submit
         </Button>
       </form>
-      {/* <hr className={classes.visibleSeparator} /> */}
     </Grid>
-  ) : null;
-  return <>{commentFormMarkup}</>;
+  ) : null
+  return <>{commentFormMarkup}</>
 }
 
-export default CommentForm;
+export default CommentForm

@@ -1,4 +1,3 @@
-
 export const appPageTheme = {
   palette: {
     primary: {
@@ -15,13 +14,13 @@ export const appPageTheme = {
     }
   },
   broadcastCardImage: {
-    minWidth: 200,
+    minWidth: 200
   },
   btnContainer: {
     display: 'flex',
-    marginLeft: "auto",
-    marginTop: "auto",
-    height: "fit-content",
+    marginLeft: 'auto',
+    marginTop: 'auto',
+    height: 'fit-content'
   },
   button: {
     margin: '20px auto',
@@ -30,11 +29,11 @@ export const appPageTheme = {
     width: '100px'
   },
   container: {
-    marginLeft: "-10px",
+    marginLeft: '-10px'
   },
   content: {
     padding: 25,
-    objectFit: "cover",
+    objectFit: 'cover'
   },
   customError: {
     color: 'red',
@@ -42,53 +41,52 @@ export const appPageTheme = {
     margin: '10px 0 0 0'
   },
   card: {
-    display: "flex",
-    marginBottom: 10,
+    display: 'flex',
+    marginBottom: 10
   },
   closeButton: {
-    position: "relative",
-    left: "92%",
-    width: "50px",
+    position: 'relative',
+    left: '92%',
+    width: '50px'
   },
   commentImage: {
-    maxWidth: "100%",
+    maxWidth: '100%',
     height: 100,
-    objectFit: "cover",
-    borderRadius: "50%",
+    objectFit: 'cover',
+    borderRadius: '50%'
   },
   commentData: {
-    marginLeft: 20,
+    marginLeft: 20
   },
-  deleteButton: {
-  },
+  deleteButton: {},
   dialogContent: {
-    padding: 20,
+    padding: 20
   },
   editDetailsBtn: {
-    float: "right",
+    float: 'right'
   },
   form: {
     textAlign: 'center'
   },
   hr: {
-    border: "none",
-    margin: "0 0 10px 0",
+    border: 'none',
+    margin: '0 0 10px 0'
   },
   image: {
     margin: '0px auto'
   },
   imageWrapper: {
-    textAlign: "center",
-    position: "relative",
-    "& button": {
-      position: "absolute",
-      top: "80%",
-      left: "70%",
-    },
+    textAlign: 'center',
+    position: 'relative',
+    '& button': {
+      position: 'absolute',
+      top: '80%',
+      left: '70%'
+    }
   },
   invisibleSeparator: {
-    border: "none",
-    margin: 4,
+    border: 'none',
+    margin: 4
   },
   pageTitle: {
     margin: '10px auto'
@@ -96,42 +94,42 @@ export const appPageTheme = {
   profileImage: {
     width: 200,
     height: 200,
-    borderRadius: "50%",
-    maxWidth: "100%",
-    objectFit: "cover",
+    borderRadius: '50%',
+    maxWidth: '100%',
+    objectFit: 'cover'
   },
   progress: {},
   progressSpinner: {
-    position: "absolute",
+    position: 'absolute'
   },
   paper: {
-    padding: 20,
+    padding: 20
   },
   profileBtn: {
-    "&:hover": {
-      cursor: "pointer",
-    },
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
   profileDetails: {
-    textAlign: "center",
-    "& span, svg": {
-      verticalAlign: "middle",
+    textAlign: 'center',
+    '& span, svg': {
+      verticalAlign: 'middle'
     },
-    "& a": {
-      color: "#00bcd4",
-    },
+    '& a': {
+      color: '#00bcd4'
+    }
   },
   span: {
-    fontSize: "12px",
+    fontSize: '12px'
   },
   spinnerDiv: {
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 50,
-    marginBottom: 50,
+    marginBottom: 50
   },
   submitButton: {
-    float: "right",
-    margin: "1rem 0",
+    float: 'right',
+    margin: '1rem 0'
   },
   typography: {
     useNextVariants: true
@@ -140,11 +138,11 @@ export const appPageTheme = {
     margin: '10px auto'
   },
   userNameLink: {
-    textDecoration: "none !important",
+    textDecoration: 'none !important'
   },
   visibleSeparator: {
-    width: "100%",
-    borderBottom: "1px solid rgba(0,0,0,0.1)",
-    marginBottom: "20px",
-  },
+    width: '100%',
+    borderBottom: '1px solid rgba(0,0,0,0.1)',
+    marginBottom: '20px'
+  }
 }

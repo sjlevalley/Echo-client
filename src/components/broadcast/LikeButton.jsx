@@ -1,54 +1,56 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 // MUI
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 // Components
-import MyButton from "../../util/MyButton";
+import MyButton from '../../util/MyButton'
 import {
   likeBroadcastAction,
-  unlikeBroadcastAction,
-} from "../../redux/broadcasts/broadcastActions";
+  unlikeBroadcastAction
+} from '../../redux/broadcasts/broadcastActions'
 
-function LikeButton({ broadcast }) {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
-  const { authenticated } = user;
-  const { broadcastId } = broadcast;
+function LikeButton ({ broadcast }) {
+  const dispatch = useDispatch()
+
+  const user = useSelector(state => state.auth)
+
+  const { authenticated } = user
+  const { broadcastId } = broadcast
 
   const isBroadcastLiked = () => {
-    const found = user.likes?.find((like) => like.broadcastId === broadcastId);
+    const found = user.likes?.find(like => like.broadcastId === broadcastId)
     if (found) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
-  };
+  }
 
   const likeBroadcast = () => {
-    dispatch(likeBroadcastAction(broadcastId));
-  };
+    dispatch(likeBroadcastAction(broadcastId))
+  }
   const unlikeBroadcast = () => {
-    dispatch(unlikeBroadcastAction(broadcastId));
-  };
+    dispatch(unlikeBroadcastAction(broadcastId))
+  }
 
   const likeButton = !authenticated ? (
-    <Link to="/login">
-      <MyButton tip="Must be logged in to like">
-        <FavoriteBorderIcon color="primary" />
+    <Link to='/login'>
+      <MyButton tip='Must be logged in to like'>
+        <FavoriteBorderIcon color='primary' />
       </MyButton>
     </Link>
   ) : isBroadcastLiked() ? (
-    <MyButton tip="Unlike" onClick={unlikeBroadcast}>
-      <FavoriteIcon fontSize="small" color="primary" />
+    <MyButton tip='Unlike' onClick={unlikeBroadcast}>
+      <FavoriteIcon fontSize='small' color='primary' />
     </MyButton>
   ) : (
-    <MyButton tip="Like" onClick={likeBroadcast}>
-      <FavoriteBorderIcon fontSize="small" color="primary" />
+    <MyButton tip='Like' onClick={likeBroadcast}>
+      <FavoriteBorderIcon fontSize='small' color='primary' />
     </MyButton>
-  );
-  return likeButton;
+  )
+  return likeButton
 }
 
-export default LikeButton;
+export default LikeButton

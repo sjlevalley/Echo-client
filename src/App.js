@@ -1,31 +1,28 @@
 import React, { useEffect } from 'react'
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from './redux/auth/authActions'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
-import { createTheme } from '@material-ui/core/styles'
-import './App.css'
-
-// Pages
+import axios from 'axios'
+// Local IMports
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import User from './pages/User'
-
-// Components
+import { appPageTheme } from './util/theme'
+import { logout } from './redux/auth/authActions'
+import './App.css'
+// MUI
 import Navbar from './components/layout/Navbar'
 import PrivateRoute from './util/PrivateRoute'
-
-// Utils
-import { appPageTheme } from './util/theme'
+import { createTheme } from '@material-ui/core/styles'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 
 axios.defaults.baseURL = 'https://us-central1-echo-726ac.cloudfunctions.net'
 
 const theme = createTheme(appPageTheme)
 
-function App() {
+function App () {
   const dispatch = useDispatch()
+
   const user = useSelector(state => state.auth.user)
 
   useEffect(() => {
@@ -43,8 +40,18 @@ function App() {
             <Routes>
               <Route path='/login' element={<Login />} user={user} />
               <Route path='/signup' element={<Signup />} user={user} />
-              <Route exact path='/users/:userName' element={<User />} user={user} />
-              <Route exact path="/users/:userName/broadcast/:broadcastId" element={<User />} user={user} />
+              <Route
+                exact
+                path='/users/:userName'
+                element={<User />}
+                user={user}
+              />
+              <Route
+                exact
+                path='/users/:userName/broadcast/:broadcastId'
+                element={<User />}
+                user={user}
+              />
               <Route
                 path='/'
                 element={

@@ -1,55 +1,56 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import dayjs from "dayjs";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
 // MUI
-import ChatIcon from "@mui/icons-material/Chat";
-import Typography from "@material-ui/core/Typography";
-import { Close as CloseIcon, UnfoldMore } from "@mui/icons-material";
-import { Dialog, DialogContent, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import ChatIcon from '@mui/icons-material/Chat'
+import Typography from '@material-ui/core/Typography'
+import { Close as CloseIcon, UnfoldMore } from '@mui/icons-material'
+import { Dialog, DialogContent, Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 // Components
-import BroadcastDialogSkeleton from "../../util/BroadcastDialogSkeleton";
-import Comments from "./Comments";
-import CommentForm from "./CommentForm";
-import LikeButton from "./LikeButton";
-import MyButton from "../../util/MyButton";
+import BroadcastDialogSkeleton from '../../util/BroadcastDialogSkeleton'
+import Comments from './Comments'
+import CommentForm from './CommentForm'
+import LikeButton from './LikeButton'
+import MyButton from '../../util/MyButton'
 import {
   getSingleBroadcastAction,
-  clearBroadcastBroadcastAction,
-} from "../../redux/broadcasts/broadcastActions";
+  clearBroadcastBroadcastAction
+} from '../../redux/broadcasts/broadcastActions'
 
-const useStyles = makeStyles((theme) => ({
-  invisibleSeparator: theme.invisibleSeparator,
-  visibleSeparator: theme.visibleSeparator,
-  profileImage: theme.profileImage,
-  dialogContent: theme.dialogContent,
+const useStyles = makeStyles(theme => ({
   closeButton: theme.closeButton,
+  dialogContent: theme.dialogContent,
+  invisibleSeparator: theme.invisibleSeparator,
+  profileImage: theme.profileImage,
   spinnerDiv: theme.spinnerDiv,
-}));
+  visibleSeparator: theme.visibleSeparator
+}))
 
-function BroadcastDialog({ broadcastId }) {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const broadcast = useSelector((state) => state.broadcasts.broadcast);
-  const loading = useSelector((state) => state.broadcasts.loading);
+function BroadcastDialog ({ broadcastId }) {
+  const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const broadcast = useSelector(state => state.broadcasts.broadcast)
+  const loading = useSelector(state => state.broadcasts.loading)
 
   const {
     body,
-    createdAt,
-    likeCount,
     comments,
     commentCount,
+    createdAt,
+    likeCount,
     userImage,
-    userName,
-  } = broadcast;
+    userName
+  } = broadcast
 
   const handleOpen = () => {
-    dispatch(getSingleBroadcastAction(broadcastId));
-  };
+    dispatch(getSingleBroadcastAction(broadcastId))
+  }
   const handleClose = () => {
-    dispatch(clearBroadcastBroadcastAction());
-  };
+    dispatch(clearBroadcastBroadcastAction())
+  }
 
   const dialogMarkup =
     loading && !broadcast.userName ? (
@@ -59,29 +60,29 @@ function BroadcastDialog({ broadcastId }) {
         <Grid item sm={5}>
           <img
             src={userImage}
-            alt="ProfileImage"
+            alt='ProfileImage'
             className={classes.profileImage}
           />
         </Grid>
         <Grid item sm={7}>
           <Typography
             component={Link}
-            color="primary"
-            variant="h5"
+            color='primary'
+            variant='h5'
             to={`api/users/${userName}`}
           >
             @{userName}
           </Typography>
           <hr className={classes.invisibleSeparator} />
-          <Typography variant="body2" color="textSecondary">
-            {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
+          <Typography variant='body2' color='textSecondary'>
+            {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
           </Typography>
           <hr className={classes.invisibleSeparator} />
-          <Typography variant="body1">{body}</Typography>
+          <Typography variant='body1'>{body}</Typography>
           <LikeButton broadcast={broadcast} />
           <span>{likeCount} likes</span>
-          <MyButton tip="Comments">
-            <ChatIcon fontSize="small" color="primary" />
+          <MyButton tip='Comments'>
+            <ChatIcon fontSize='small' color='primary' />
           </MyButton>
           {commentCount === 1 ? (
             <span className={classes.span}> {commentCount} Comment</span>
@@ -93,25 +94,25 @@ function BroadcastDialog({ broadcastId }) {
         <CommentForm />
         <Comments comments={comments} />
       </Grid>
-    );
+    )
 
   return (
     <>
       <MyButton
         onClick={handleOpen}
-        tip="View Broadcast"
+        tip='View Broadcast'
         tipClassName={classes.expandButton}
       >
-        <UnfoldMore color="primary" />
+        <UnfoldMore color='primary' />
       </MyButton>
       <Dialog
         open={broadcast.userName || loading}
         onClose={handleClose}
         fullWidth
-        maxWidth="sm"
+        maxWidth='sm'
       >
         <MyButton
-          tip="Close"
+          tip='Close'
           onClick={handleClose}
           tipClassName={classes.closeButton}
         >
@@ -122,7 +123,7 @@ function BroadcastDialog({ broadcastId }) {
         </DialogContent>
       </Dialog>
     </>
-  );
+  )
 }
 
-export default BroadcastDialog;
+export default BroadcastDialog

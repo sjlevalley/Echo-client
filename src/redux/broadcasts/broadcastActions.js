@@ -1,29 +1,29 @@
 // Import the reducers from each respective state slice.
 import axios from 'axios'
 import {
-  setBroadcasts,
-  clearBroadcasts,
-  broadcastSliceLikeBroadcast,
-  broadcastSliceUnlikeBroadcast,
+  broadcastSliceClearBroadcast,
+  broadcastsSliceClearUserProfile,
   broadcastSliceDeleteBroadcast,
+  broadcastSliceIncrementCommentCount,
+  broadcastSliceLikeBroadcast,
   broadcastSlicePostBroadcast,
   broadcastSliceSetBroadcast,
-  broadcastSliceClearBroadcast,
-  broadcastSliceSubmitComment,
   broadcastsSliceSetUserProfile,
-  broadcastsSliceClearUserProfile,
+  broadcastSliceSubmitComment,
+  broadcastSliceUnlikeBroadcast,
+  clearBroadcasts,
   loadingBroadcast,
-  broadcastSliceIncrementCommentCount
+  setBroadcasts
 } from './broadcastsSlice'
 import {
   authSliceLikeBroadcast,
   authSliceUnlikeBroadcast
 } from '../auth/authSlice'
 import {
-  loadingUITrue,
-  setError,
   clearError,
-  loadingUIFalse
+  loadingUIFalse,
+  loadingUITrue,
+  setError
 } from '../ui/uiSlice'
 
 export const fetchAllBroadcasts = () => {
@@ -79,7 +79,7 @@ export const deleteBroadcastAction = broadcastId => {
   }
 }
 
-export const postBroadcastAction = (newBroadcast) => {
+export const postBroadcastAction = newBroadcast => {
   return async dispatch => {
     dispatch(clearError())
     try {
@@ -92,7 +92,7 @@ export const postBroadcastAction = (newBroadcast) => {
   }
 }
 
-export const getSingleBroadcastAction = (broadcastId) => {
+export const getSingleBroadcastAction = broadcastId => {
   return async dispatch => {
     dispatch(clearError())
     dispatch(loadingBroadcast())
@@ -110,7 +110,10 @@ export const submitCommentBroadcastAction = (broadcastId, commentData) => {
   return async dispatch => {
     dispatch(clearError())
     try {
-      const { data } = await axios.post(`/api/broadcast/${broadcastId}/comment`, commentData)
+      const { data } = await axios.post(
+        `/api/broadcast/${broadcastId}/comment`,
+        commentData
+      )
       dispatch(broadcastSliceSubmitComment(data))
       dispatch(broadcastSliceIncrementCommentCount(data))
     } catch (e) {
@@ -121,7 +124,7 @@ export const submitCommentBroadcastAction = (broadcastId, commentData) => {
   }
 }
 
-export const getUserDataBroadcastAction = (userName) => {
+export const getUserDataBroadcastAction = userName => {
   return async dispatch => {
     dispatch(loadingUITrue())
     dispatch(clearError())
