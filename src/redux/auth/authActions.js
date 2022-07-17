@@ -83,7 +83,7 @@ export const uploadImage = formData => {
   return async dispatch => {
     dispatch(loadingUser())
     try {
-      const { data } = await axios.post('/api/user/image', formData)
+      await axios.post('/api/user/image', formData)
       // Maybe throw an alert if successful
       dispatch(getUserData())
     } catch (e) {
@@ -97,7 +97,7 @@ export const editUserDetails = userDetails => {
   return async dispatch => {
     dispatch(loadingUser())
     try {
-      const { data } = await axios.post('/api/user', userDetails)
+      await axios.post('/api/user', userDetails)
       // Maybe throw a notification if successful
       dispatch(getUserData())
     } catch (e) {
@@ -110,7 +110,7 @@ export const editUserDetails = userDetails => {
 export const userActionsMarkNotificationsRead = unreadNotificationsIds => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(
+      await axios.post(
         '/api/notifications',
         unreadNotificationsIds
       )
